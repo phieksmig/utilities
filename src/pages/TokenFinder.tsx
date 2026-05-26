@@ -7,11 +7,14 @@ export default function TokenFinder() {
   return (
     <div>
       <Heading level={1}>Hitta tokens</Heading>
-      <p>Här kommer du kunna sökaefter design tokens...</p>
+      <p>
+        Här kommer du kunna söka efter en hexkod och se vilka design tokens som
+        har den färgen
+      </p>
 
       <div>
         <TextField
-          label="Ange tokennamn"
+          label="Ange hexkod (t.ex. #ff0000)"
           id="search-input"
           value={searchQuery}
           onChange={setSearchQuery}
