@@ -4,7 +4,7 @@ import { TextField, Heading } from "@midas-ds/components";
 export default function PixelToRem() {
   const [pixelValue, setPixelValue] = useState("16");
 
-  const remValue = (parseFloat(pixelValue) / 16).toFixed(2);
+  const remValue = (parseFloat(pixelValue) / 16).toFixed(4);
 
   return (
     <div>
