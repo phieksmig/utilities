@@ -5,9 +5,15 @@ import { ArrowLeftRight } from "lucide-react";
 export default function PixelToRem() {
   const [pixelValue, setPixelValue] = useState("16");
   const [remToPixel, setRemToPixel] = useState(false);
-  const remFromPixelValue = (parseFloat(pixelValue) / 16).toFixed(4);
   const [remValue, setRemValue] = useState("1");
-  const pixelFromRemValue = (parseFloat(remValue) * 16).toFixed(2);
+
+  const formatValue = (value: number, decimals: number) => {
+    if (Number.isNaN(value)) return "";
+    return parseFloat(value.toFixed(decimals)).toString();
+  };
+
+  const remFromPixelValue = formatValue(parseFloat(pixelValue) / 16, 4);
+  const pixelFromRemValue = formatValue(parseFloat(remValue) * 16, 2);
 
   if (remToPixel) {
     return (
@@ -33,7 +39,10 @@ export default function PixelToRem() {
           <Button
             variant="icon"
             icon={ArrowLeftRight}
-            onPress={() => setRemToPixel(false)}
+            onPress={() => {
+              setPixelValue(pixelFromRemValue);
+              setRemToPixel(false);
+            }}
           />
           <TextField
             label="Pixels"
@@ -70,7 +79,10 @@ export default function PixelToRem() {
         <Button
           variant="icon"
           icon={ArrowLeftRight}
-          onPress={() => setRemToPixel(true)}
+          onPress={() => {
+            setRemValue(remFromPixelValue);
+            setRemToPixel(true);
+          }}
         />
         <TextField
           label="rem"
