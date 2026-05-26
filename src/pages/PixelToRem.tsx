@@ -1,10 +1,51 @@
 import { useState } from "react";
-import { TextField, Heading } from "@midas-ds/components";
+import { TextField, Heading, Button } from "@midas-ds/components";
+import { ArrowLeftRight } from "lucide-react";
 
 export default function PixelToRem() {
   const [pixelValue, setPixelValue] = useState("16");
+  const [remToPixel, setRemToPixel] = useState(false);
+  const remFromPixelValue = (parseFloat(pixelValue) / 16).toFixed(4);
+  const [remValue, setRemValue] = useState("1");
+  const pixelFromRemValue = (parseFloat(remValue) * 16).toFixed(2);
 
-  const remValue = (parseFloat(pixelValue) / 16).toFixed(4);
+  if (remToPixel) {
+    return (
+      <div>
+        <Heading level={1}>REM to Pixel Converter</Heading>
+        <p>Konvertera REM till Pixel (baserat på fontstorlek 16px).</p>
+
+        <div
+          style={{
+            display: "flex",
+            flexDirection: "row",
+            gap: "1rem",
+            alignItems: "flex-end",
+          }}
+        >
+          <TextField
+            label="rem"
+            id="rem-input"
+            type="number"
+            value={remValue}
+            onChange={setRemValue}
+          />
+          <Button
+            variant="icon"
+            icon={ArrowLeftRight}
+            onPress={() => setRemToPixel(false)}
+          />
+          <TextField
+            label="Pixels"
+            id="pixel-input"
+            type="number"
+            value={pixelFromRemValue}
+            isReadOnly
+          />
+        </div>
+      </div>
+    );
+  }
 
   return (
     <div>
@@ -14,8 +55,9 @@ export default function PixelToRem() {
       <div
         style={{
           display: "flex",
+          flexDirection: "row",
           gap: "1rem",
-          maxWidth: "600px",
+          alignItems: "flex-end",
         }}
       >
         <TextField
@@ -25,11 +67,16 @@ export default function PixelToRem() {
           value={pixelValue}
           onChange={setPixelValue}
         />
+        <Button
+          variant="icon"
+          icon={ArrowLeftRight}
+          onPress={() => setRemToPixel(true)}
+        />
         <TextField
           label="rem"
           id="rem-input"
           type="number"
-          value={remValue}
+          value={remFromPixelValue}
           isReadOnly
         />
       </div>
