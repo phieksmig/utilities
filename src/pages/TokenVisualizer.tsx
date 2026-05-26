@@ -1,11 +1,12 @@
+import { Heading } from "@midas-ds/components";
+
 export default function TokenVisualizer() {
   return (
-    <div style={{ padding: "2rem" }}>
-      <h1>Token Visualizer</h1>
-      <p>Visualize and explore design tokens.</p>
+    <div>
+      <Heading level={1}>Token Visualizer</Heading>
 
-      <div style={{ marginTop: "2rem" }}>
-        <p>Token visualizer content will be displayed here.</p>
+      <div>
+        <p>Här kommer du kunna se vilken färg en token har</p>
       </div>
     </div>
   );
