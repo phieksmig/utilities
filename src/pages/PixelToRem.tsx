@@ -9,7 +9,7 @@ export default function PixelToRem() {
   return (
     <div>
       <Heading level={1}>Pixel to REM Converter</Heading>
-      <p>Convert pixel values to REM units (based on 16px base).</p>
+      <p>Konvertera pixelvärden till REM (baserat på fontstorlek 16px).</p>
 
       <div
         style={{
