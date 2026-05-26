@@ -1,31 +1,27 @@
 import { useState } from "react";
+import { TextField, Heading } from "@midas-ds/components";
 
 export default function TokenFinder() {
   const [searchQuery, setSearchQuery] = useState("");
 
   return (
     <div>
-      <h1>Token Finder</h1>
-      <p>Search and find design tokens.</p>
+      <Heading level={1}>Hitta tokens</Heading>
+      <p>Här kommer du kunna sökaefter design tokens...</p>
 
-      <div style={{ marginTop: "2rem" }}>
-        <label htmlFor="search-input">
-          Search tokens:
-          <input
-            id="search-input"
-            type="text"
-            placeholder="Enter token name..."
-            value={searchQuery}
-            onChange={(e) => setSearchQuery(e.target.value)}
-            style={{ marginLeft: "0.5rem", padding: "0.5rem", width: "300px" }}
-          />
-        </label>
+      <div>
+        <TextField
+          label="Ange tokennamn"
+          id="search-input"
+          value={searchQuery}
+          onChange={setSearchQuery}
+        />
       </div>
 
       {searchQuery && (
-        <div style={{ marginTop: "1rem" }}>
+        <div>
           <p>
-            Search results for: <strong>{searchQuery}</strong>
+            Du har sökt efter <strong>{searchQuery}</strong>
           </p>
         </div>
       )}
