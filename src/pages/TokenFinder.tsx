@@ -64,33 +64,6 @@ export default function TokenFinder() {
           onSubmit={(value) => setHexInput(value)}
         />
 
-        {/* Om vi har träffar */}
-        {matchedTokens.length > 0 && (
-          <div className="mt-6 space-y-3">
-            <span className="text-xs uppercase font-semibold text-muted tracking-wider">
-              Hittade {matchedTokens.length} matchande{" "}
-              {matchedTokens.length === 1 ? "token" : "tokens"}:
-            </span>
-
-            <div className="grid gap-2">
-              {matchedTokens.map((token) => (
-                <div
-                  key={token.name}
-                  className="flex items-center justify-between p-3 border rounded-lg bg-neutral-lightest"
-                >
-                  <div className="flex items-center gap-3">
-                    <div>
-                      <p className="font-mono font-bold text-sm">
-                        {token.name}
-                      </p>
-                    </div>
-                  </div>
-                </div>
-              ))}
-            </div>
-          </div>
-        )}
-
         {semanticTokensLight.length > 0 && (
           <div className="mt-6 space-y-3">
             <Heading level={3}>
