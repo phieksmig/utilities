@@ -1,6 +1,10 @@
 import { SearchField, InfoBanner } from "@midas-ds/components";
 import { useState, useMemo } from "react";
-import { getAllColorTokens } from "../utils//tokenUtils";
+import {
+  getAllColorTokens,
+  getReferenceTokenNamesForHex,
+  getSemanticTokensForReferences,
+} from "../utils//tokenUtils";
 
 export default function TokenFinder() {
   const [hexInput, setHexInput] = useState<string>("");
@@ -8,42 +12,24 @@ export default function TokenFinder() {
   // Indexera alla tokens från theme.css (useMemo så vi inte gör om detta vid varje keystroke)
   const allTokens = useMemo(() => getAllColorTokens(), []);
 
-  // Sökfunktionen som matchar HEX-koden
-  const matchedTokens = useMemo(() => {
-    const cleanedInput = hexInput.trim().toLowerCase().replace("#", "");
+  const matchedReferenceTokenNames = useMemo(
+    () => getReferenceTokenNamesForHex(hexInput, allTokens),
+    [hexInput, allTokens],
+  );
 
-    if (!cleanedInput) return [];
-
-    return Object.entries(allTokens)
-      .filter(([_, tokenValue]) => {
-        const cleanedValue = tokenValue.toLowerCase().replace("#", "");
-
-        // 1. Direkt matchning (t.ex. "ffffff" === "ffffff")
-        if (cleanedValue === cleanedInput) return true;
-
-        // 2. Hantera kortfattad HEX (t.ex. om användaren skriver #fff men token är #ffffff)
-        if (cleanedInput.length === 3) {
-          const expandedInput = cleanedInput
-            .split("")
-            .map((char) => char + char)
-            .join("");
-          if (cleanedValue === expandedInput) return true;
-        }
-
-        // 3. Bonus: Om webbläsaren returnerar värdet som "rgb(255, 255, 255)"
-        // så kollar vi om den städade rgb-strängen innehåller vår input (valfritt men säkert)
-        if (tokenValue.includes("rgb") && cleanedInput.length >= 3) {
-          // Enkel sökning, men räcker långt för interna verktyg
-          return false;
-        }
-
-        return false;
-      })
-      .map(([tokenName, tokenValue]) => ({
+  const matchedTokens = useMemo(
+    () =>
+      matchedReferenceTokenNames.map((tokenName) => ({
         name: tokenName,
-        value: tokenValue,
-      }));
-  }, [hexInput, allTokens]);
+        value: allTokens[tokenName],
+      })),
+    [matchedReferenceTokenNames, allTokens],
+  );
+
+  const semanticTokens = useMemo(
+    () => getSemanticTokensForReferences(matchedReferenceTokenNames, allTokens),
+    [matchedReferenceTokenNames, allTokens],
+  );
 
   // Validera om inputen ser ut som en giltig färg (3 eller 6 tecken hex)
   const isValidHex = useMemo(() => {
@@ -88,6 +74,29 @@ export default function TokenFinder() {
                         {token.name}
                       </p>
                     </div>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+        )}
+
+        {semanticTokens.length > 0 && (
+          <div className="mt-6 space-y-3">
+            <span className="text-xs uppercase font-semibold text-muted tracking-wider">
+              Semantic tokens using the matched reference token
+              {semanticTokens.length === 1 ? "" : "s"}:
+            </span>
+
+            <div className="grid gap-2">
+              {semanticTokens.map((token) => (
+                <div
+                  key={token.name}
+                  className="flex items-center justify-between p-3 border rounded-lg bg-neutral-lightest"
+                >
+                  <div className="flex flex-col gap-1">
+                    <p className="font-mono font-bold text-sm">{token.name}</p>
+                    <p className="text-xs text-muted">{token.value}</p>
                   </div>
                 </div>
               ))}
