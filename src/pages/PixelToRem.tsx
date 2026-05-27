@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { TextField, Heading, Button } from "@midas-ds/components";
 import { ArrowLeftRight } from "lucide-react";
+import styles from "./PixelToRem.module.css";
 
 export default function PixelToRem() {
   const [pixelValue, setPixelValue] = useState("16");
@@ -17,18 +18,11 @@ export default function PixelToRem() {
 
   if (remToPixel) {
     return (
-      <div>
+      <div className={styles.mainContainer}>
         <Heading level={1}>REM till Pixlar</Heading>
         <p>Konvertera REM till Pixel (baserat på fontstorlek 16px).</p>
 
-        <div
-          style={{
-            display: "flex",
-            flexDirection: "row",
-            gap: "1rem",
-            alignItems: "flex-end",
-          }}
-        >
+        <div className={styles.converter}>
           <TextField
             label="Rem"
             id="rem-input"
@@ -57,18 +51,11 @@ export default function PixelToRem() {
   }
 
   return (
-    <div>
+    <div className={styles.mainContainer}>
       <Heading level={1}>Pixlar till Rem</Heading>
       <p>Konvertera pixelvärden till REM (baserat på fontstorlek 16px).</p>
 
-      <div
-        style={{
-          display: "flex",
-          flexDirection: "row",
-          gap: "1rem",
-          alignItems: "flex-end",
-        }}
-      >
+      <div className={styles.converter}>
         <TextField
           label="Pixlar"
           id="pixel-input"
