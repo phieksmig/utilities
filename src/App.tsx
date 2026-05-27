@@ -11,6 +11,7 @@ import {
 } from "@midas-ds/layout";
 import { ArrowLeftRight, Search, PencilRuler, Home } from "lucide-react";
 import { NavLink } from "./components/NavLink";
+import { GlobalToastRegion } from "@midas-ds/components";
 
 function App() {
   return (
@@ -45,6 +46,7 @@ function App() {
         </Sidebar>
 
         <Main>
+          <GlobalToastRegion />
           <Outlet />
         </Main>
       </LayoutContent>

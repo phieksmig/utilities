@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { TextField, Heading, Button } from "@midas-ds/components";
+import { toastQueue, TextField, Heading, Button } from "@midas-ds/components";
 import { ArrowLeftRight, Copy } from "lucide-react";
 import styles from "./PixelToRem.module.css";
 
@@ -18,40 +18,48 @@ export default function PixelToRem() {
 
   if (remToPixel) {
     return (
-      <div className={styles.mainContainer}>
-        <Heading level={1}>REM till Pixlar</Heading>
-        <p>Konvertera rem till pixelvärden (baserat på fontstorlek 16px).</p>
+      <>
+        <div className={styles.mainContainer}>
+          <Heading level={1}>REM till Pixlar</Heading>
+          <p>Konvertera rem till pixelvärden (baserat på fontstorlek 16px).</p>
 
-        <div className={styles.converter}>
-          <TextField
-            label="Rem"
-            id="rem-input"
-            type="number"
-            value={remValue}
-            onChange={setRemValue}
-          />
-          <Button
-            variant="icon"
-            icon={ArrowLeftRight}
-            onPress={() => {
-              setPixelValue(pixelFromRemValue);
-              setRemToPixel(false);
-            }}
-          />
-          <TextField
-            label="Pixlar"
-            id="pixel-input"
-            type="number"
-            value={pixelFromRemValue}
-            isReadOnly
-          />
-          <Button
-            variant="icon"
-            icon={Copy}
-            onPress={() => navigator.clipboard.writeText(pixelFromRemValue)}
-          />
+          <div className={styles.converter}>
+            <TextField
+              label="Rem"
+              id="rem-input"
+              type="number"
+              value={remValue}
+              onChange={setRemValue}
+            />
+            <Button
+              variant="icon"
+              icon={ArrowLeftRight}
+              onPress={() => {
+                setPixelValue(pixelFromRemValue);
+                setRemToPixel(false);
+              }}
+            />
+            <TextField
+              label="Pixlar"
+              id="pixel-input"
+              type="number"
+              value={pixelFromRemValue}
+              isReadOnly
+            />
+            <Button
+              variant="icon"
+              icon={Copy}
+              onPress={() => {
+                navigator.clipboard.writeText(pixelFromRemValue);
+                toastQueue.add(
+                  { type: "success", message: "Pixelvärdet har kopierats" },
+                  { timeout: 5000 },
+                );
+              }}
+            />
+          </div>
         </div>
-      </div>
+      </>
     );
   }
 
@@ -86,7 +94,13 @@ export default function PixelToRem() {
         <Button
           variant="icon"
           icon={Copy}
-          onPress={() => navigator.clipboard.writeText(remFromPixelValue)}
+          onPress={() => {
+            navigator.clipboard.writeText(remFromPixelValue);
+            toastQueue.add(
+              { type: "success", message: "rem-värdet har kopierats" },
+              { timeout: 5000 },
+            );
+          }}
         />
       </div>
     </div>
