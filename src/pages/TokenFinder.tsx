@@ -1,4 +1,4 @@
-import { SearchField, InfoBanner } from "@midas-ds/components";
+import { SearchField, InfoBanner, Heading } from "@midas-ds/components";
 import { useState, useMemo } from "react";
 import {
   getAllColorTokens,
@@ -29,6 +29,16 @@ export default function TokenFinder() {
   const semanticTokens = useMemo(
     () => getSemanticTokensForReferences(matchedReferenceTokenNames, allTokens),
     [matchedReferenceTokenNames, allTokens],
+  );
+
+  const semanticTokensLight = useMemo(
+    () => semanticTokens.filter((token) => token.lightMatch),
+    [semanticTokens],
+  );
+
+  const semanticTokensDark = useMemo(
+    () => semanticTokens.filter((token) => token.darkMatch),
+    [semanticTokens],
   );
 
   // Validera om inputen ser ut som en giltig färg (3 eller 6 tecken hex)
@@ -81,22 +91,36 @@ export default function TokenFinder() {
           </div>
         )}
 
-        {semanticTokens.length > 0 && (
+        {semanticTokensLight.length > 0 && (
           <div className="mt-6 space-y-3">
-            <span className="text-xs uppercase font-semibold text-muted tracking-wider">
-              Semantic tokens using the matched reference token
-              {semanticTokens.length === 1 ? "" : "s"}:
-            </span>
+            <Heading level={3}>
+              Semantic tokens matching in light theme:
+            </Heading>
 
             <div className="grid gap-2">
-              {semanticTokens.map((token) => (
+              {semanticTokensLight.map((token) => (
                 <div
                   key={token.name}
                   className="flex items-center justify-between p-3 border rounded-lg bg-neutral-lightest"
                 >
                   <div className="flex flex-col gap-1">
                     <p className="font-mono font-bold text-sm">{token.name}</p>
-                    <p className="text-xs text-muted">{token.value}</p>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+        )}
+
+        {semanticTokensDark.length > 0 && (
+          <div className="mt-6 space-y-3">
+            <Heading level={3}>Semantic tokens matching in dark theme:</Heading>
+
+            <div className="grid gap-2">
+              {semanticTokensDark.map((token) => (
+                <div key={token.name}>
+                  <div className="flex flex-col gap-1">
+                    <p className="font-mono font-bold text-sm">{token.name}</p>
                   </div>
                 </div>
               ))}
