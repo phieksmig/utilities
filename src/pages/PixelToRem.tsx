@@ -18,7 +18,7 @@ export default function PixelToRem() {
   if (remToPixel) {
     return (
       <div>
-        <Heading level={1}>REM to Pixel Converter</Heading>
+        <Heading level={1}>REM till Pixlar</Heading>
         <p>Konvertera REM till Pixel (baserat på fontstorlek 16px).</p>
 
         <div
@@ -30,7 +30,7 @@ export default function PixelToRem() {
           }}
         >
           <TextField
-            label="rem"
+            label="Rem"
             id="rem-input"
             type="number"
             value={remValue}
@@ -45,7 +45,7 @@ export default function PixelToRem() {
             }}
           />
           <TextField
-            label="Pixels"
+            label="Pixlar"
             id="pixel-input"
             type="number"
             value={pixelFromRemValue}
@@ -58,7 +58,7 @@ export default function PixelToRem() {
 
   return (
     <div>
-      <Heading level={1}>Pixel to REM Converter</Heading>
+      <Heading level={1}>Pixlar till Rem</Heading>
       <p>Konvertera pixelvärden till REM (baserat på fontstorlek 16px).</p>
 
       <div
@@ -70,7 +70,7 @@ export default function PixelToRem() {
         }}
       >
         <TextField
-          label="Pixels"
+          label="Pixlar"
           id="pixel-input"
           type="number"
           value={pixelValue}
@@ -85,7 +85,7 @@ export default function PixelToRem() {
           }}
         />
         <TextField
-          label="rem"
+          label="Rem"
           id="rem-input"
           type="number"
           value={remFromPixelValue}
