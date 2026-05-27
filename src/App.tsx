@@ -11,11 +11,14 @@ import {
 } from "@midas-ds/layout";
 import { ArrowLeftRight, Search, PencilRuler, Home } from "lucide-react";
 import { NavLink } from "./components/NavLink";
+import { LogoComponent } from "./components/Logo";
 
 function App() {
   return (
     <Layout>
-      <Header>Utilitites</Header>
+      <Header>
+        <LogoComponent />
+      </Header>
 
       <LayoutContent>
         <Sidebar title="Navigation">
