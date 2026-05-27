@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { TextField, Heading, Button } from "@midas-ds/components";
-import { ArrowLeftRight } from "lucide-react";
+import { ArrowLeftRight, Copy } from "lucide-react";
 import styles from "./PixelToRem.module.css";
 
 export default function PixelToRem() {
@@ -45,6 +45,11 @@ export default function PixelToRem() {
             value={pixelFromRemValue}
             isReadOnly
           />
+          <Button
+            variant="icon"
+            icon={Copy}
+            onPress={() => navigator.clipboard.writeText(pixelFromRemValue)}
+          />
         </div>
       </div>
     );
@@ -77,6 +82,11 @@ export default function PixelToRem() {
           type="number"
           value={remFromPixelValue}
           isReadOnly
+        />
+        <Button
+          variant="icon"
+          icon={Copy}
+          onPress={() => navigator.clipboard.writeText(remFromPixelValue)}
         />
       </div>
     </div>
