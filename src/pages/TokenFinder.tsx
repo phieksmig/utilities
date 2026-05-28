@@ -4,19 +4,25 @@ import {
   getAllColorTokens,
   getReferenceTokenNamesForHex,
   getSemanticTokensForReferences,
-} from "../utils//tokenUtils";
+} from "../utils/tokenUtils";
 
+/**
+ * Reverse token lookup page that lets the user search a color value and see
+ * which design tokens reference it.
+ */
 export default function TokenFinder() {
   const [hexInput, setHexInput] = useState<string>("");
 
-  // Indexera alla tokens från theme.css (useMemo så vi inte gör om detta vid varje keystroke)
+  // Load the available CSS token values once so matching can reuse them.
   const allTokens = useMemo(() => getAllColorTokens(), []);
 
+  // Find the direct reference tokens that use the entered color.
   const matchedReferenceTokenNames = useMemo(
     () => getReferenceTokenNamesForHex(hexInput, allTokens),
     [hexInput, allTokens],
   );
 
+  // Build the matched token objects that include both the name and value.
   const matchedTokens = useMemo(
     () =>
       matchedReferenceTokenNames.map((tokenName) => ({
@@ -26,22 +32,25 @@ export default function TokenFinder() {
     [matchedReferenceTokenNames, allTokens],
   );
 
+  // Resolve semantic token matches based on the found reference tokens.
   const semanticTokens = useMemo(
     () => getSemanticTokensForReferences(matchedReferenceTokenNames, allTokens),
     [matchedReferenceTokenNames, allTokens],
   );
 
+  // Separate semantic matches that are relevant in light mode.
   const semanticTokensLight = useMemo(
     () => semanticTokens.filter((token) => token.lightMatch),
     [semanticTokens],
   );
 
+  // Separate semantic matches that are relevant in dark mode.
   const semanticTokensDark = useMemo(
     () => semanticTokens.filter((token) => token.darkMatch),
     [semanticTokens],
   );
 
-  // Validera om inputen ser ut som en giltig färg (3 eller 6 tecken hex)
+  // Check whether the current input is a valid hex color value.
   const isValidHex = useMemo(() => {
     const hexRegex = /^#?([0-9a-fA-F]{3}|[0-9a-fA-F]{6})$/;
     return hexInput === "" || hexRegex.test(hexInput);
