@@ -12,9 +12,8 @@
   align-items: center;
 }
 
-.subtitleContainer {
+.infoContainer {
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
   gap: 0.5rem;
-  align-items: center;
 }
