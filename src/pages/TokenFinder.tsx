@@ -6,6 +6,7 @@ import {
   Button,
   DialogTrigger,
   Popover,
+  toastQueue,
 } from "@midas-ds/components";
 import { useState, useMemo } from "react";
 import {
@@ -133,7 +134,17 @@ export default function TokenFinder() {
                   variant="icon"
                   size="medium"
                   icon={CopyIcon}
-                  onClick={() => navigator.clipboard.writeText(token.name)}
+                  onPress={() => {
+                    navigator.clipboard.writeText(token.name);
+                    toastQueue.add(
+                      {
+                        type: "success",
+                        message:
+                          `${token.name}` + " har kopierats till urklipp",
+                      },
+                      { timeout: 5000 },
+                    );
+                  }}
                   aria-label={`Kopiera ${token.name}`}
                 />
               </div>
@@ -156,7 +167,17 @@ export default function TokenFinder() {
                   variant="icon"
                   size="medium"
                   icon={CopyIcon}
-                  onClick={() => navigator.clipboard.writeText(token.name)}
+                  onPress={() => {
+                    navigator.clipboard.writeText(token.name);
+                    toastQueue.add(
+                      {
+                        type: "success",
+                        message:
+                          `${token.name}` + " har kopierats till urklipp",
+                      },
+                      { timeout: 5000 },
+                    );
+                  }}
                   aria-label={`Kopiera ${token.name}`}
                 />
               </div>
