@@ -83,15 +83,15 @@ export default function TokenFinder() {
               Funktionen söker i :root efter den angivna färgkoden. Om den
               hittar en matchande referenstoken så används det tokennamnet för
               att söka efter semantiska tokens som refererar till den token. Det
-              går att söka både med och utan # i början av hex-koden, och både
-              3- och 6-siffriga hex-koder stöds.
+              går att söka både med och utan # i början av hex-koden och både 3-
+              och 6-siffriga hex-koder stöds.
             </AccordionItem>
           </Accordion>
         </div>
       </div>
 
       <SearchField
-        placeholder="t.ex. #0056b3 eller fff"
+        placeholder="t.ex. #f2f2f2 eller fff"
         onSubmit={(value) => setHexInput(value)}
       />
 
