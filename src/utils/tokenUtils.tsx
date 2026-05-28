@@ -4,6 +4,7 @@ const HEX_TOKEN_REGEX = /^#?([0-9a-fA-F]{3}|[0-9a-fA-F]{6})$/;
 const RGB_TOKEN_REGEX =
   /rgb\s*\(\s*(\d{1,3})\s*,\s*(\d{1,3})\s*,\s*(\d{1,3})\s*\)/i;
 const LIGHT_DARK_REGEX = /light-dark\s*\(\s*([^,]+?)\s*,\s*([^)]+?)\s*\)/i;
+const CSS_VAR_REFERENCE_REGEX = /var\(\s*([^,)]+?)\s*\)/gi;
 
 export interface SemanticTokenMatch {
   name: string;
@@ -12,6 +13,23 @@ export interface SemanticTokenMatch {
   darkMatch: boolean;
 }
 
+function extractReferencedTokenNames(value: string): string[] {
+  const refs = new Set<string>();
+
+  for (const match of value.matchAll(CSS_VAR_REFERENCE_REGEX)) {
+    const tokenReference = match[1].trim().toLowerCase();
+    if (tokenReference.startsWith("--")) {
+      refs.add(tokenReference);
+    }
+  }
+
+  return Array.from(refs);
+}
+
+/**
+ * Reads all custom CSS color variables from the loaded stylesheets so they can
+ * be searched and matched later.
+ */
 export function getAllColorTokens(): Record<string, string> {
   const tokens: Record<string, string> = {};
 
@@ -41,6 +59,10 @@ export function getAllColorTokens(): Record<string, string> {
   return tokens;
 }
 
+/**
+ * Normalizes a hex color input by trimming whitespace, removing a leading #,
+ * lowercasing it, and expanding shorthand values like "fff" to full hex.
+ */
 export function normalizeHexInput(input: string): string | null {
   const cleaned = input.trim().toLowerCase().replace(/^#/, "");
   if (!HEX_TOKEN_REGEX.test(input.trim())) {
@@ -57,6 +79,9 @@ export function normalizeHexInput(input: string): string | null {
   return cleaned;
 }
 
+/**
+ * Converts an rgb(...) string into its equivalent six-digit hex value.
+ */
 export function rgbValueToHex(value: string): string | null {
   const match = RGB_TOKEN_REGEX.exec(value);
   if (!match) return null;
@@ -71,6 +96,10 @@ export function rgbValueToHex(value: string): string | null {
     .join("");
 }
 
+/**
+ * Finds all reference token names whose stored color value matches the given
+ * hex input, including rgb(...) values.
+ */
 export function getReferenceTokenNamesForHex(
   hexInput: string,
   allTokens: Record<string, string>,
@@ -100,14 +129,18 @@ export function getReferenceTokenNamesForHex(
     .map(([tokenName]) => tokenName);
 }
 
+/**
+ * Matches semantic tokens against reference token names, including light/dark
+ * values declared with light-dark(...).
+ */
 export function getSemanticTokensForReferences(
   referenceTokenNames: string[],
   allTokens: Record<string, string>,
 ): SemanticTokenMatch[] {
   if (referenceTokenNames.length === 0) return [];
 
-  const lowerReferenceNames = referenceTokenNames.map((name) =>
-    name.toLowerCase(),
+  const lowerReferenceNames = new Set(
+    referenceTokenNames.map((name) => name.toLowerCase()),
   );
   const referenceSet = new Set(referenceTokenNames);
 
@@ -116,39 +149,35 @@ export function getSemanticTokensForReferences(
     .map(([name, value]) => {
       const lowerValue = value.toLowerCase();
       const lightDarkMatch = LIGHT_DARK_REGEX.exec(lowerValue);
-      const [lightArg = "", darkArg = ""] = lightDarkMatch
-        ? [lightDarkMatch[1], lightDarkMatch[2]]
-        : ["", ""];
 
-      const matches = lowerReferenceNames.map((refName) => {
-        const matchedInValue = lowerValue.includes(refName);
-        const matchedInLight = lightArg.includes(refName);
-        const matchedInDark = darkArg.includes(refName);
-        return {
-          matchedInValue,
-          matchedInLight,
-          matchedInDark,
-        };
-      });
+      const referencedTokens = extractReferencedTokenNames(value);
+      const lightReferencedTokens = lightDarkMatch
+        ? extractReferencedTokenNames(lightDarkMatch[1])
+        : [];
+      const darkReferencedTokens = lightDarkMatch
+        ? extractReferencedTokenNames(lightDarkMatch[2])
+        : [];
 
-      const lightMatch = matches.some(
-        ({ matchedInLight, matchedInValue }) =>
-          matchedInLight || (!lightDarkMatch && matchedInValue),
+      const lightMatch = referencedTokens.some((token) =>
+        lowerReferenceNames.has(token),
       );
-      const darkMatch = matches.some(({ matchedInDark }) => matchedInDark);
-      const hasAnyMatch = matches.some(({ matchedInValue }) => matchedInValue);
+      const darkMatch = darkReferencedTokens.some((token) =>
+        lowerReferenceNames.has(token),
+      );
+      const hasAnyMatch = lightMatch || darkMatch;
+
+      if (!hasAnyMatch) return null;
 
       return {
         name,
         value,
-        lightMatch,
+        lightMatch: lightDarkMatch
+          ? lightReferencedTokens.some((token) =>
+              lowerReferenceNames.has(token),
+            )
+          : lightMatch,
         darkMatch,
-        hasAnyMatch,
       };
     })
-    .filter(
-      (token): token is SemanticTokenMatch & { hasAnyMatch: boolean } =>
-        token.hasAnyMatch,
-    )
-    .map(({ hasAnyMatch, ...token }) => token);
+    .filter((token): token is SemanticTokenMatch => token !== null);
 }
