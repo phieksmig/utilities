@@ -4,6 +4,8 @@ import {
   Heading,
   Text,
   Button,
+  DialogTrigger,
+  Popover,
 } from "@midas-ds/components";
 import { useState, useMemo } from "react";
 import {
@@ -12,7 +14,7 @@ import {
   getSemanticTokensForReferences,
 } from "../utils/tokenUtils";
 import styles from "./TokenFinder.module.css";
-import { CopyIcon } from "lucide-react";
+import { CopyIcon, MessageSquareCode } from "lucide-react";
 
 /**
  * Reverse token lookup page that lets the user search a color value and see
@@ -70,10 +72,24 @@ export default function TokenFinder() {
         <Heading enableMargins isExpressive level={1}>
           Hitta tokens från färgkod
         </Heading>
-        <Text>
-          Skriv in en HEX-kod för att se vilka design tokens i{" "}
-          <code>theme.css</code> som använder den färgen.
-        </Text>
+        <div className={styles.subtitleContainer}>
+          <Text>
+            Sök efter en HEX-kod för att se vilka av Midas design tokens som
+            använder den färgen
+          </Text>
+          <DialogTrigger>
+            <Button
+              variant="icon"
+              size="medium"
+              icon={MessageSquareCode}
+            ></Button>
+            <Popover>
+              Funktionen söker i :root efter den angivna färgkoden. Om den
+              hittar en matchande referenstoken så används det tokennamnet för
+              att söka efter semantiska tokens som refererar till den tokenen.
+            </Popover>
+          </DialogTrigger>
+        </div>
       </div>
 
       <SearchField
