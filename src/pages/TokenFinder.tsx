@@ -73,24 +73,10 @@ export default function TokenFinder() {
         <Heading enableMargins isExpressive level={1}>
           Hitta tokens från färgkod
         </Heading>
-        <div className={styles.subtitleContainer}>
-          <Text>
-            Sök efter en HEX-kod för att se vilka av Midas design tokens som
-            använder den färgen
-          </Text>
-          <DialogTrigger>
-            <Button
-              variant="icon"
-              size="medium"
-              icon={MessageSquareCode}
-            ></Button>
-            <Popover>
-              Funktionen söker i :root efter den angivna färgkoden. Om den
-              hittar en matchande referenstoken så används det tokennamnet för
-              att söka efter semantiska tokens som refererar till den tokenen.
-            </Popover>
-          </DialogTrigger>
-        </div>
+        <Text>
+          Sök efter en HEX-kod för att se vilka design tokens som använder den
+          färgen
+        </Text>
       </div>
 
       <SearchField
