@@ -20,7 +20,9 @@ export default function PixelToRem() {
     return (
       <>
         <div className={styles.mainContainer}>
-          <Heading level={1}>REM till Pixlar</Heading>
+          <Heading enableMargins isExpressive level={1}>
+            REM till Pixlar
+          </Heading>
           <p>Konvertera rem till pixelvärden (baserat på fontstorlek 16px).</p>
 
           <div className={styles.converter}>
@@ -65,7 +67,9 @@ export default function PixelToRem() {
 
   return (
     <div className={styles.mainContainer}>
-      <Heading level={1}>Pixlar till Rem</Heading>
+      <Heading enableMargins isExpressive level={1}>
+        Pixlar till Rem
+      </Heading>
       <p>Konvertera pixelvärden till rem (baserat på fontstorlek 16px).</p>
 
       <div className={styles.converter}>

@@ -17,3 +17,7 @@
   flex-direction: column;
   gap: 0.5rem;
 }
+
+.searchContainer {
+  max-width: 500px;
+}
