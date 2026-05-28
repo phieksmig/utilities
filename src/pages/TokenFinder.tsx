@@ -1,10 +1,18 @@
-import { SearchField, InfoBanner, Heading, Text } from "@midas-ds/components";
+import {
+  SearchField,
+  InfoBanner,
+  Heading,
+  Text,
+  Button,
+} from "@midas-ds/components";
 import { useState, useMemo } from "react";
 import {
   getAllColorTokens,
   getReferenceTokenNamesForHex,
   getSemanticTokensForReferences,
 } from "../utils/tokenUtils";
+import styles from "./TokenFinder.module.css";
+import { CopyIcon } from "lucide-react";
 
 /**
  * Reverse token lookup page that lets the user search a color value and see
@@ -57,7 +65,7 @@ export default function TokenFinder() {
   }, [hexInput]);
 
   return (
-    <div>
+    <div className={styles.mainContainer}>
       <div>
         <Heading enableMargins isExpressive level={1}>
           Hitta tokens från färgkod
@@ -68,78 +76,86 @@ export default function TokenFinder() {
         </Text>
       </div>
 
-      <div>
-        <SearchField
-          placeholder="t.ex. #0056b3 eller fff"
-          onSubmit={(value) => setHexInput(value)}
-        />
+      <SearchField
+        placeholder="t.ex. #0056b3 eller fff"
+        onSubmit={(value) => setHexInput(value)}
+      />
 
-        {/* Om vi har träffar */}
-        {matchedTokens.length > 0 && (
+      {/* Om vi har träffar */}
+      {matchedTokens.length > 0 && (
+        <div>
+          <Heading enableMargins level={3}>
+            Hittade {matchedTokens.length} matchande{" "}
+            {matchedTokens.length === 1 ? "referenstoken" : "referenstokens"}:
+          </Heading>
+
           <div>
-            <Heading enableMargins level={3}>
-              Hittade {matchedTokens.length} matchande{" "}
-              {matchedTokens.length === 1 ? "referenstoken" : "referenstokens"}:
-            </Heading>
-
-            <div>
-              {matchedTokens.map((token) => (
-                <div key={token.name}>
+            {matchedTokens.map((token) => (
+              <div key={token.name}>
+                <div>
                   <div>
-                    <div>
-                      <p>{token.name}</p>
-                    </div>
+                    <p>{token.name}</p>
                   </div>
                 </div>
-              ))}
-            </div>
+              </div>
+            ))}
           </div>
-        )}
+        </div>
+      )}
 
-        {semanticTokensLight.length > 0 && (
+      {semanticTokensLight.length > 0 && (
+        <div>
+          <Heading enableMargins level={3}>
+            Semantiska tokens som använder den färgen i light theme:
+          </Heading>
+
           <div>
-            <Heading enableMargins level={3}>
-              Semantiska tokens som använder den färgen i light theme:
-            </Heading>
-
-            <div>
-              {semanticTokensLight.map((token) => (
-                <div key={token.name}>
-                  <div>
-                    <Text>{token.name}</Text>
-                  </div>
-                </div>
-              ))}
-            </div>
+            {semanticTokensLight.map((token) => (
+              <div key={token.name} className={styles.tokenContainer}>
+                <Text>{token.name}</Text>
+                <Button
+                  variant="icon"
+                  size="medium"
+                  icon={CopyIcon}
+                  onClick={() => navigator.clipboard.writeText(token.name)}
+                  aria-label={`Kopiera ${token.name}`}
+                />
+              </div>
+            ))}
           </div>
-        )}
+        </div>
+      )}
 
-        {semanticTokensDark.length > 0 && (
+      {semanticTokensDark.length > 0 && (
+        <div>
+          <Heading enableMargins level={3}>
+            Semantiska tokens som använder den färgen i dark theme:
+          </Heading>
+
           <div>
-            <Heading enableMargins level={3}>
-              Semantiska tokens som använder den färgen i dark theme:
-            </Heading>
-
-            <div>
-              {semanticTokensDark.map((token) => (
-                <div key={token.name}>
-                  <div>
-                    <Text>{token.name}</Text>
-                  </div>
-                </div>
-              ))}
-            </div>
+            {semanticTokensDark.map((token) => (
+              <div key={token.name} className={styles.tokenContainer}>
+                <Text>{token.name}</Text>
+                <Button
+                  variant="icon"
+                  size="medium"
+                  icon={CopyIcon}
+                  onClick={() => navigator.clipboard.writeText(token.name)}
+                  aria-label={`Kopiera ${token.name}`}
+                />
+              </div>
+            ))}
           </div>
-        )}
+        </div>
+      )}
 
-        {/* Om användaren har skrivit en giltig HEX men vi inte har några träffar */}
-        {hexInput && isValidHex && matchedTokens.length === 0 && (
-          <InfoBanner type="info">
-            Det är inga tokens i systemet som använder färgen{" "}
-            <strong>{hexInput}</strong>.
-          </InfoBanner>
-        )}
-      </div>
+      {/* Om användaren har skrivit en giltig HEX men vi inte har några träffar */}
+      {hexInput && isValidHex && matchedTokens.length === 0 && (
+        <InfoBanner type="info">
+          Det är inga tokens i systemet som använder färgen{" "}
+          <strong>{hexInput}</strong>.
+        </InfoBanner>
+      )}
     </div>
   );
 }
