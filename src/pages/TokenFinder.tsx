@@ -4,8 +4,6 @@ import {
   Heading,
   Text,
   Button,
-  DialogTrigger,
-  Popover,
   toastQueue,
 } from "@midas-ds/components";
 import { useState, useMemo } from "react";
@@ -15,7 +13,7 @@ import {
   getSemanticTokensForReferences,
 } from "../utils/tokenUtils";
 import styles from "./TokenFinder.module.css";
-import { CopyIcon, MessageSquareCode } from "lucide-react";
+import { CopyIcon } from "lucide-react";
 
 /**
  * Reverse token lookup page that lets the user search a color value and see
