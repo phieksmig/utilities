@@ -12,6 +12,7 @@ import {
 import { ArrowLeftRight, Search, PencilRuler, Home } from "lucide-react";
 import { NavLink } from "./components/NavLink";
 import { LogoComponent } from "./components/Logo";
+import { GlobalToastRegion } from "@midas-ds/components";
 
 function App() {
   return (
@@ -48,6 +49,7 @@ function App() {
         </Sidebar>
 
         <Main>
+          <GlobalToastRegion />
           <Outlet />
         </Main>
       </LayoutContent>
