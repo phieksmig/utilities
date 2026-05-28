@@ -1,4 +1,4 @@
-import { SearchField, InfoBanner, Heading } from "@midas-ds/components";
+import { SearchField, InfoBanner, Heading, Text } from "@midas-ds/components";
 import { useState, useMemo } from "react";
 import {
   getAllColorTokens,
@@ -57,17 +57,18 @@ export default function TokenFinder() {
   }, [hexInput]);
 
   return (
-    <div className="space-y-6 p-6 max-w-2xl">
+    <div>
       <div>
-        <h1 className="text-2xl font-bold">Reverse Token Lookup</h1>
-        <p className="text-muted text-sm mt-1">
+        <Heading isExpressive level={1}>
+          Hitta tokens från färgkod
+        </Heading>
+        <Text>
           Skriv in en HEX-kod för att se vilka design tokens i{" "}
-          <code className="bg-muted px-1 rounded">theme.css</code> som använder
-          just den färgen.
-        </p>
+          <code>theme.css</code> som använder den färgen.
+        </Text>
       </div>
 
-      <div className="space-y-4">
+      <div>
         <SearchField
           placeholder="t.ex. #0056b3 eller fff"
           onSubmit={(value) => setHexInput(value)}
@@ -75,23 +76,18 @@ export default function TokenFinder() {
 
         {/* Om vi har träffar */}
         {matchedTokens.length > 0 && (
-          <div className="mt-6 space-y-3">
-            <span className="text-xs uppercase font-semibold text-muted tracking-wider">
+          <div>
+            <Text>
               Hittade {matchedTokens.length} matchande{" "}
-              {matchedTokens.length === 1 ? "token" : "tokens"}:
-            </span>
+              {matchedTokens.length === 1 ? "referenstoken" : "referenstokens"}:
+            </Text>
 
-            <div className="grid gap-2">
+            <div>
               {matchedTokens.map((token) => (
-                <div
-                  key={token.name}
-                  className="flex items-center justify-between p-3 border rounded-lg bg-neutral-lightest"
-                >
-                  <div className="flex items-center gap-3">
+                <div key={token.name}>
+                  <div>
                     <div>
-                      <p className="font-mono font-bold text-sm">
-                        {token.name}
-                      </p>
+                      <p>{token.name}</p>
                     </div>
                   </div>
                 </div>
@@ -101,19 +97,16 @@ export default function TokenFinder() {
         )}
 
         {semanticTokensLight.length > 0 && (
-          <div className="mt-6 space-y-3">
+          <div>
             <Heading level={3}>
               Semantic tokens matching in light theme:
             </Heading>
 
-            <div className="grid gap-2">
+            <div>
               {semanticTokensLight.map((token) => (
-                <div
-                  key={token.name}
-                  className="flex items-center justify-between p-3 border rounded-lg bg-neutral-lightest"
-                >
-                  <div className="flex flex-col gap-1">
-                    <p className="font-mono font-bold text-sm">{token.name}</p>
+                <div key={token.name}>
+                  <div>
+                    <Text>{token.name}</Text>
                   </div>
                 </div>
               ))}
@@ -125,11 +118,11 @@ export default function TokenFinder() {
           <div className="mt-6 space-y-3">
             <Heading level={3}>Semantic tokens matching in dark theme:</Heading>
 
-            <div className="grid gap-2">
+            <div>
               {semanticTokensDark.map((token) => (
                 <div key={token.name}>
-                  <div className="flex flex-col gap-1">
-                    <p className="font-mono font-bold text-sm">{token.name}</p>
+                  <div>
+                    <Text>{token.name}</Text>
                   </div>
                 </div>
               ))}
@@ -140,7 +133,7 @@ export default function TokenFinder() {
         {/* Om användaren har skrivit en giltig HEX men vi inte har några träffar */}
         {hexInput && isValidHex && matchedTokens.length === 0 && (
           <InfoBanner type="info">
-            Inga existerande tokens i systemet använder färgen{" "}
+            Det är inga tokens i systemet som använder färgen{" "}
             <strong>{hexInput}</strong>.
           </InfoBanner>
         )}
