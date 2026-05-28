@@ -89,12 +89,12 @@ export default function TokenFinder() {
           </Accordion>
         </div>
       </div>
-
-      <SearchField
-        placeholder="t.ex. #f2f2f2 eller fff"
-        onSubmit={(value) => setHexInput(value)}
-      />
-
+      <div className={styles.searchContainer}>
+        <SearchField
+          placeholder="t.ex. #f2f2f2 eller fff"
+          onSubmit={(value) => setHexInput(value)}
+        />
+      </div>
       {/* Om vi har träffar */}
       {matchedTokens.length > 0 && (
         <div>
