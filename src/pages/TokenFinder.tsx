@@ -59,7 +59,7 @@ export default function TokenFinder() {
   return (
     <div>
       <div>
-        <Heading isExpressive level={1}>
+        <Heading enableMargins isExpressive level={1}>
           Hitta tokens från färgkod
         </Heading>
         <Text>
@@ -77,10 +77,10 @@ export default function TokenFinder() {
         {/* Om vi har träffar */}
         {matchedTokens.length > 0 && (
           <div>
-            <Text>
+            <Heading enableMargins level={3}>
               Hittade {matchedTokens.length} matchande{" "}
               {matchedTokens.length === 1 ? "referenstoken" : "referenstokens"}:
-            </Text>
+            </Heading>
 
             <div>
               {matchedTokens.map((token) => (
@@ -98,8 +98,8 @@ export default function TokenFinder() {
 
         {semanticTokensLight.length > 0 && (
           <div>
-            <Heading level={3}>
-              Semantic tokens matching in light theme:
+            <Heading enableMargins level={3}>
+              Semantiska tokens som använder den färgen i light theme:
             </Heading>
 
             <div>
@@ -115,8 +115,10 @@ export default function TokenFinder() {
         )}
 
         {semanticTokensDark.length > 0 && (
-          <div className="mt-6 space-y-3">
-            <Heading level={3}>Semantic tokens matching in dark theme:</Heading>
+          <div>
+            <Heading enableMargins level={3}>
+              Semantiska tokens som använder den färgen i dark theme:
+            </Heading>
 
             <div>
               {semanticTokensDark.map((token) => (
