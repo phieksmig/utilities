@@ -5,6 +5,8 @@ import {
   Text,
   Button,
   toastQueue,
+  Accordion,
+  AccordionItem,
 } from "@midas-ds/components";
 import { useState, useMemo } from "react";
 import {
@@ -71,14 +73,25 @@ export default function TokenFinder() {
         <Heading enableMargins isExpressive level={1}>
           Hitta tokens från färgkod
         </Heading>
-        <Text>
-          Sök efter en HEX-kod för att se vilka design tokens som använder den
-          färgen
-        </Text>
+        <div className={styles.infoContainer}>
+          <Text>
+            Sök efter en HEX-kod för att se vilka design tokens som använder den
+            färgen
+          </Text>
+          <Accordion>
+            <AccordionItem id="more-info" title="Så funkar det">
+              Funktionen söker i :root efter den angivna färgkoden. Om den
+              hittar en matchande referenstoken så används det tokennamnet för
+              att söka efter semantiska tokens som refererar till den token. Det
+              går att söka både med och utan # i början av hex-koden och både 3-
+              och 6-siffriga hex-koder stöds.
+            </AccordionItem>
+          </Accordion>
+        </div>
       </div>
 
       <SearchField
-        placeholder="t.ex. #0056b3 eller fff"
+        placeholder="t.ex. #f2f2f2 eller fff"
         onSubmit={(value) => setHexInput(value)}
       />
 
