@@ -32,12 +32,6 @@ function App() {
               </NavLink>
             </NavigationItem>
             <NavigationItem>
-              <NavLink path="/tokenvisualizer" icon={<PencilRuler />}>
-                Token Visualizer
-              </NavLink>
-            </NavigationItem>
-
-            <NavigationItem>
               <NavLink path="/tokenfinder" icon={<Search />}>
                 Token Finder
               </NavLink>
