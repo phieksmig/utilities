@@ -3,7 +3,6 @@
 const HEX_TOKEN_REGEX = /^#?([0-9a-fA-F]{3}|[0-9a-fA-F]{6})$/;
 const RGB_TOKEN_REGEX =
   /rgb\s*\(\s*(\d{1,3})\s*,\s*(\d{1,3})\s*,\s*(\d{1,3})\s*\)/i;
-const LIGHT_DARK_REGEX = /light-dark\s*\(\s*([^,]+?)\s*,\s*([^)]+?)\s*\)/i;
 const CSS_VAR_REFERENCE_REGEX = /var\(\s*([^,)]+?)\s*\)/gi;
 
 export interface SemanticTokenMatch {
@@ -24,6 +23,50 @@ function extractReferencedTokenNames(value: string): string[] {
   }
 
   return Array.from(refs);
+}
+
+function splitLightDarkArguments(value: string): {
+  lightArg: string;
+  darkArg: string;
+} | null {
+  const lowerValue = value.toLowerCase();
+  const startIndex = lowerValue.indexOf("light-dark(");
+
+  if (startIndex === -1) return null;
+
+  let depth = 1;
+  let currentSection = "light";
+  let lightArg = "";
+  let darkArg = "";
+
+  for (let i = startIndex + "light-dark(".length; i < value.length; i++) {
+    const char = value[i];
+
+    if (char === "," && depth === 1) {
+      currentSection = "dark";
+      continue;
+    }
+
+    if (char === "(") {
+      depth += 1;
+    } else if (char === ")") {
+      depth -= 1;
+
+      if (depth === 0) {
+        break;
+      }
+    }
+
+    if (currentSection === "light") {
+      lightArg += char;
+    } else {
+      darkArg += char;
+    }
+  }
+
+  if (lightArg.length === 0 || darkArg.length === 0) return null;
+
+  return { lightArg, darkArg };
 }
 
 /**
@@ -147,23 +190,23 @@ export function getSemanticTokensForReferences(
   return Object.entries(allTokens)
     .filter(([tokenName]) => !referenceSet.has(tokenName))
     .map(([name, value]) => {
-      const lowerValue = value.toLowerCase();
-      const lightDarkMatch = LIGHT_DARK_REGEX.exec(lowerValue);
-
+      const parsedLightDark = splitLightDarkArguments(value);
       const referencedTokens = extractReferencedTokenNames(value);
-      const lightReferencedTokens = lightDarkMatch
-        ? extractReferencedTokenNames(lightDarkMatch[1])
+
+      const lightReferencedTokens = parsedLightDark
+        ? extractReferencedTokenNames(parsedLightDark.lightArg)
         : [];
-      const darkReferencedTokens = lightDarkMatch
-        ? extractReferencedTokenNames(lightDarkMatch[2])
+      const darkReferencedTokens = parsedLightDark
+        ? extractReferencedTokenNames(parsedLightDark.darkArg)
         : [];
 
-      const lightMatch = referencedTokens.some((token) =>
-        lowerReferenceNames.has(token),
-      );
-      const darkMatch = darkReferencedTokens.some((token) =>
-        lowerReferenceNames.has(token),
-      );
+      const lightMatch = parsedLightDark
+        ? lightReferencedTokens.some((token) => lowerReferenceNames.has(token))
+        : referencedTokens.some((token) => lowerReferenceNames.has(token));
+      const darkMatch = parsedLightDark
+        ? darkReferencedTokens.some((token) => lowerReferenceNames.has(token))
+        : false;
+
       const hasAnyMatch = lightMatch || darkMatch;
 
       if (!hasAnyMatch) return null;
@@ -171,11 +214,7 @@ export function getSemanticTokensForReferences(
       return {
         name,
         value,
-        lightMatch: lightDarkMatch
-          ? lightReferencedTokens.some((token) =>
-              lowerReferenceNames.has(token),
-            )
-          : lightMatch,
+        lightMatch,
         darkMatch,
       };
     })
