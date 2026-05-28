@@ -13,7 +13,7 @@ import {
   getSemanticTokensForReferences,
 } from "../utils/tokenUtils";
 import styles from "./TokenFinder.module.css";
-import { CopyIcon } from "lucide-react";
+import { Copy } from "lucide-react";
 
 /**
  * Reverse token lookup page that lets the user search a color value and see
@@ -117,7 +117,7 @@ export default function TokenFinder() {
                 <Button
                   variant="icon"
                   size="medium"
-                  icon={CopyIcon}
+                  icon={Copy}
                   onPress={() => {
                     navigator.clipboard.writeText(token.name);
                     toastQueue.add(
@@ -150,7 +150,7 @@ export default function TokenFinder() {
                 <Button
                   variant="icon"
                   size="medium"
-                  icon={CopyIcon}
+                  icon={Copy}
                   onPress={() => {
                     navigator.clipboard.writeText(token.name);
                     toastQueue.add(
