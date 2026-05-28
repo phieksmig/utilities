@@ -1,11 +1,10 @@
-import Logo from "../assets/MIDAS_crown.png";
+import Logo from "../assets/midas_crown.svg";
+import styles from "./Logo.module.css";
 
 export const LogoComponent = () => {
   return (
-    <img
-      src={Logo}
-      alt="Midas Logo"
-      style={{ width: "100px", height: "100px" }}
-    />
+    <div className={styles.logoContainer}>
+      <img src={Logo} alt="Midas Design System Logo" className={styles.logo} />
+    </div>
   );
 };
