@@ -8,7 +8,7 @@ import {
   Grid,
   GridItem,
 } from "@midas-ds/components";
-import styles from "./Home.module.css";
+import styles from "./Dashboard.module.css";
 import { useEffect, useState } from "react";
 
 export default function Home() {
