@@ -49,6 +49,7 @@ export default function Home() {
   });
 
   const { todos, addTodo, toggleTodo, deleteTodo } = useTodos();
+  const activeTodos = todos.filter((todo) => !todo.isCompleted);
 
   return (
     <div className={styles.mainContainer}>
@@ -178,23 +179,27 @@ export default function Home() {
             <CardBody>
               <AddTaskForm addTodo={addTodo} />
               <Heading level={3}>Dina uppgifter</Heading>
-              {todos.map((todo) => (
-                <div key={todo.id} className={styles.todoList}>
-                  <Checkbox
-                    isSelected={todo.isCompleted}
-                    onChange={() => toggleTodo(todo.id)}
-                  >
-                    {todo.title}
-                  </Checkbox>
-                  <p>{todo.description}</p>
+              {activeTodos.length === 0 ? (
+                <p>Inga uppgifter kvar, bra jobbat!</p>
+              ) : (
+                activeTodos.map((todo) => (
+                  <div key={todo.id} className={styles.todoList}>
+                    <Checkbox
+                      isSelected={todo.isCompleted}
+                      onChange={() => toggleTodo(todo.id)}
+                    >
+                      {todo.title}
+                    </Checkbox>
+                    <p>{todo.description}</p>
 
-                  <Button
-                    variant="icon"
-                    icon={Trash2}
-                    onClick={() => deleteTodo(todo.id)}
-                  ></Button>
-                </div>
-              ))}
+                    <Button
+                      variant="icon"
+                      icon={Trash2}
+                      onClick={() => deleteTodo(todo.id)}
+                    ></Button>
+                  </div>
+                ))
+              )}
             </CardBody>
           </Card>
         </GridItem>
