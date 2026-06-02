@@ -1,5 +1,4 @@
 import {
-  Text,
   LinkButton,
   ButtonGroup,
   Card,
@@ -12,6 +11,7 @@ import styles from "./Dashboard.module.css";
 import { useNpmDownloads } from "../hooks/useNpmDownloads";
 import { useGithubPullRequests } from "../hooks/useGithubPullRequests";
 import { useGithubIssues } from "../hooks/useGithubIssues";
+import { BigText } from "../components/BigText";
 
 export default function Home() {
   const layoutDownloads = useNpmDownloads({
@@ -49,11 +49,11 @@ export default function Home() {
               subHeading="Totalt antal"
             />
             <CardBody>
-              <Text>
+              <BigText>
                 {allTimeComponentDownloads !== null
                   ? allTimeComponentDownloads.toLocaleString()
                   : "Loading..."}
-              </Text>
+              </BigText>
             </CardBody>
           </Card>
         </GridItem>
@@ -64,11 +64,11 @@ export default function Home() {
               subHeading="Denna vecka"
             />
             <CardBody>
-              <Text>
+              <BigText>
                 {componentDownloads !== null
                   ? componentDownloads.toLocaleString()
                   : "Loading..."}
-              </Text>
+              </BigText>
             </CardBody>
           </Card>
         </GridItem>
@@ -79,11 +79,11 @@ export default function Home() {
               subHeading="Denna vecka"
             />
             <CardBody>
-              <Text>
+              <BigText>
                 {layoutDownloads !== null
                   ? layoutDownloads.toLocaleString()
                   : "Loading..."}
-              </Text>
+              </BigText>
             </CardBody>
           </Card>
         </GridItem>
@@ -92,11 +92,11 @@ export default function Home() {
           <Card>
             <CardHeader heading="Öppna issues på Github" />
             <CardBody>
-              <Text>
+              <BigText>
                 {openIssues !== null
                   ? openIssues.toLocaleString()
                   : "Loading..."}
-              </Text>
+              </BigText>
             </CardBody>
           </Card>
         </GridItem>
@@ -104,11 +104,11 @@ export default function Home() {
           <Card>
             <CardHeader heading="Öppna pull requests på Github" />
             <CardBody>
-              <Text>
+              <BigText>
                 {openPullRequests !== null
                   ? openPullRequests.toLocaleString()
                   : "Loading..."}
-              </Text>
+              </BigText>
             </CardBody>
           </Card>
         </GridItem>
