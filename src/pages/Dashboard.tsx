@@ -9,75 +9,54 @@ import {
   GridItem,
 } from "@midas-ds/components";
 import styles from "./Dashboard.module.css";
-import { useEffect, useState } from "react";
+import { useNpmDownloads } from "../hooks/useNpmDownloads";
+import { useGithubPullRequests } from "../hooks/useGithubPullRequests";
+import { useGithubIssues } from "../hooks/useGithubIssues";
 
 export default function Home() {
-  const [downloads, setDownloads] = useState<number | null>(null);
-  const [layoutDownloads, setLayoutDownloads] = useState<number | null>(null);
-  const [openIssues, setOpenIssues] = useState<number | null>(null);
+  const layoutDownloads = useNpmDownloads({
+    packageName: "@midas-ds/layout",
+    point: "last-week",
+  });
 
-  useEffect(() => {
-    async function load() {
-      try {
-        const response = await fetch(
-          "https://api.npmjs.org/downloads/point/last-week/@midas-ds/components",
-        );
-        const data = await response.json();
-        setDownloads(
-          typeof data?.downloads === "number" ? data.downloads : null,
-        );
-      } catch (error) {
-        console.error("Error fetching download data:", error);
-        setDownloads(null);
-      }
-    }
+  const componentDownloads = useNpmDownloads({
+    packageName: "@midas-ds/components",
+    point: "last-week",
+  });
 
-    load();
-  }, []);
+  const allTimeComponentDownloads = useNpmDownloads({
+    packageName: "@midas-ds/components",
+    point: "1000-01-01:3000-12-31",
+  });
 
-  useEffect(() => {
-    async function load() {
-      try {
-        const response = await fetch(
-          "https://api.npmjs.org/downloads/point/last-week/@midas-ds/layout",
-        );
-        const data = await response.json();
-        setLayoutDownloads(
-          typeof data?.downloads === "number" ? data.downloads : null,
-        );
-      } catch (error) {
-        console.error("Error fetching download data:", error);
-        setLayoutDownloads(null);
-      }
-    }
+  const openPullRequests = useGithubPullRequests({
+    repoName: "midas",
+    orgName: "migrationsverket",
+  });
 
-    load();
-  }, []);
-
-  useEffect(() => {
-    async function load() {
-      try {
-        const response = await fetch(
-          "https://api.github.com/repos/migrationsverket/midas",
-        );
-        const data = await response.json();
-        setOpenIssues(
-          typeof data?.open_issues_count === "number"
-            ? data.open_issues_count
-            : null,
-        );
-      } catch (error) {
-        console.error("Error fetching download data:", error);
-        setDownloads(null);
-      }
-    }
-
-    load();
-  }, []);
+  const openIssues = useGithubIssues({
+    repoName: "midas",
+    orgName: "migrationsverket",
+  });
 
   return (
     <div className={styles.mainContainer}>
       <Grid>
+        <GridItem size={"auto"}>
+          <Card>
+            <CardHeader
+              heading="Nedladdningar @midas-ds/layout"
+              subHeading="Totalt antal"
+            />
+            <CardBody>
+              <Text>
+                {allTimeComponentDownloads !== null
+                  ? allTimeComponentDownloads.toLocaleString()
+                  : "Loading..."}
+              </Text>
+            </CardBody>
+          </Card>
+        </GridItem>
         <GridItem size={"auto"}>
           <Card>
             <CardHeader
@@ -86,7 +65,9 @@ export default function Home() {
             />
             <CardBody>
               <Text>
-                {downloads !== null ? downloads.toLocaleString() : "Loading..."}
+                {componentDownloads !== null
+                  ? componentDownloads.toLocaleString()
+                  : "Loading..."}
               </Text>
             </CardBody>
           </Card>
@@ -106,6 +87,7 @@ export default function Home() {
             </CardBody>
           </Card>
         </GridItem>
+
         <GridItem size={"auto"}>
           <Card>
             <CardHeader heading="Öppna issues på Github" />
@@ -113,6 +95,18 @@ export default function Home() {
               <Text>
                 {openIssues !== null
                   ? openIssues.toLocaleString()
+                  : "Loading..."}
+              </Text>
+            </CardBody>
+          </Card>
+        </GridItem>
+        <GridItem size={"auto"}>
+          <Card>
+            <CardHeader heading="Öppna pull requests på Github" />
+            <CardBody>
+              <Text>
+                {openPullRequests !== null
+                  ? openPullRequests.toLocaleString()
                   : "Loading..."}
               </Text>
             </CardBody>
