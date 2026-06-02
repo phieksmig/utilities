@@ -1,6 +1,6 @@
 import { StrictMode } from "react";
 import { createRoot } from "react-dom/client";
-import { BrowserRouter, Routes, Route } from "react-router";
+import { HashRouter, Routes, Route } from "react-router";
 import "./index.css";
 import "@midas-ds/components/default.css";
 import "@midas-ds/layout/default.css";
@@ -11,7 +11,7 @@ import Dashboard from "./pages/Dashboard.tsx";
 
 createRoot(document.getElementById("root")!).render(
   <StrictMode>
-    <BrowserRouter basename={import.meta.env.BASE_URL}>
+    <HashRouter>
       <Routes>
         <Route element={<App />}>
           <Route path="/" index element={<Dashboard />} />
@@ -19,6 +19,6 @@ createRoot(document.getElementById("root")!).render(
           <Route path="/tokenfinder" element={<TokenFinder />} />
         </Route>
       </Routes>
-    </BrowserRouter>
+    </HashRouter>
   </StrictMode>,
 );
