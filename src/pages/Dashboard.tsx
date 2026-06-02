@@ -1,5 +1,6 @@
 import {
   LinkButton,
+  Button,
   ButtonGroup,
   Card,
   CardBody,
@@ -9,12 +10,17 @@ import {
   CardActions,
   Link,
   Spinner,
+  Checkbox,
+  Heading,
 } from "@midas-ds/components";
 import styles from "./Dashboard.module.css";
 import { useNpmDownloads } from "../hooks/useNpmDownloads";
 import { useGithubPullRequests } from "../hooks/useGithubPullRequests";
 import { useGithubIssues } from "../hooks/useGithubIssues";
 import { BigText } from "../components/BigText";
+import { AddTaskForm } from "../components/AddTaskForm";
+import { useTodos } from "../hooks/useTodos";
+import { Trash2 } from "lucide-react";
 
 export default function Home() {
   const layoutDownloads = useNpmDownloads({
@@ -41,6 +47,8 @@ export default function Home() {
     repoName: "midas",
     orgName: "migrationsverket",
   });
+
+  const { todos, addTodo, toggleTodo, deleteTodo } = useTodos();
 
   return (
     <div className={styles.mainContainer}>
@@ -159,6 +167,34 @@ export default function Home() {
                   Storybook
                 </LinkButton>
               </ButtonGroup>
+            </CardBody>
+          </Card>
+        </GridItem>
+      </Grid>
+      <Grid>
+        <GridItem size={"auto"}>
+          <Card>
+            <CardHeader heading="Att göra" />
+            <CardBody>
+              <AddTaskForm addTodo={addTodo} />
+              <Heading level={3}>Dina uppgifter</Heading>
+              {todos.map((todo) => (
+                <div key={todo.id} className={styles.todoList}>
+                  <Checkbox
+                    isSelected={todo.isCompleted}
+                    onChange={() => toggleTodo(todo.id)}
+                  >
+                    {todo.title}
+                  </Checkbox>
+                  <p>{todo.description}</p>
+
+                  <Button
+                    variant="icon"
+                    icon={Trash2}
+                    onClick={() => deleteTodo(todo.id)}
+                  ></Button>
+                </div>
+              ))}
             </CardBody>
           </Card>
         </GridItem>
