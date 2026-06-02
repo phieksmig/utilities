@@ -6,6 +6,8 @@ import {
   CardHeader,
   Grid,
   GridItem,
+  CardActions,
+  Link,
 } from "@midas-ds/components";
 import styles from "./Dashboard.module.css";
 import { useNpmDownloads } from "../hooks/useNpmDownloads";
@@ -98,6 +100,14 @@ export default function Home() {
                   : "Loading..."}
               </BigText>
             </CardBody>
+            <CardActions>
+              <Link
+                href="https://github.com/migrationsverket/midas/issues"
+                standalone
+              >
+                Gå till issues
+              </Link>
+            </CardActions>
           </Card>
         </GridItem>
         <GridItem size={"auto"}>
@@ -110,6 +120,14 @@ export default function Home() {
                   : "Loading..."}
               </BigText>
             </CardBody>
+            <CardActions>
+              <Link
+                href="https://github.com/migrationsverket/midas/pulls"
+                standalone
+              >
+                Gå till Pull Requests
+              </Link>
+            </CardActions>
           </Card>
         </GridItem>
         <GridItem size={"auto"}>
@@ -128,12 +146,6 @@ export default function Home() {
                   variant="secondary"
                 >
                   Storybook
-                </LinkButton>
-                <LinkButton
-                  href="https://github.com/migrationsverket/midas"
-                  variant="tertiary"
-                >
-                  Github
                 </LinkButton>
               </ButtonGroup>
             </CardBody>
