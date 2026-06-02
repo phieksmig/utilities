@@ -2,8 +2,12 @@
 import { useState } from "react";
 import { type Todo, type Priority } from "../types/types";
 
+const STORAGE_KEY = "todos";
 export function useTodos() {
-  const [todos, setTodos] = useState<Todo[]>([]);
+  const [todos, setTodos] = useState<Todo[]>(() => {
+    const savedTodos = localStorage.getItem(STORAGE_KEY);
+    return savedTodos ? JSON.parse(savedTodos) : [];
+  });
 
   const addTodo = (title: string, description: string, priority: Priority) => {
     const newTodo: Todo = {

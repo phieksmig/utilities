@@ -21,6 +21,7 @@ import { BigText } from "../components/BigText";
 import { AddTaskForm } from "../components/AddTaskForm";
 import { useTodos } from "../hooks/useTodos";
 import { Trash2 } from "lucide-react";
+import { useEffect } from "react";
 
 export default function Home() {
   const layoutDownloads = useNpmDownloads({
@@ -49,6 +50,15 @@ export default function Home() {
   });
 
   const { todos, addTodo, toggleTodo, deleteTodo } = useTodos();
+
+  // Persistant storage of the todo
+  useEffect(() => {
+    if (todos) {
+      localStorage.setItem("todos", JSON.stringify(todos));
+    } else {
+      localStorage.removeItem("todos");
+    }
+  }, [todos]);
 
   return (
     <div className={styles.mainContainer}>
