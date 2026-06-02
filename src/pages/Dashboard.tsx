@@ -8,6 +8,7 @@ import {
   GridItem,
   CardActions,
   Link,
+  Spinner,
 } from "@midas-ds/components";
 import styles from "./Dashboard.module.css";
 import { useNpmDownloads } from "../hooks/useNpmDownloads";
@@ -52,9 +53,11 @@ export default function Home() {
             />
             <CardBody>
               <BigText>
-                {allTimeComponentDownloads !== null
-                  ? allTimeComponentDownloads.toLocaleString()
-                  : "Loading..."}
+                {allTimeComponentDownloads !== null ? (
+                  allTimeComponentDownloads.toLocaleString()
+                ) : (
+                  <Spinner />
+                )}
               </BigText>
             </CardBody>
           </Card>
@@ -67,9 +70,11 @@ export default function Home() {
             />
             <CardBody>
               <BigText>
-                {componentDownloads !== null
-                  ? componentDownloads.toLocaleString()
-                  : "Loading..."}
+                {componentDownloads !== null ? (
+                  componentDownloads.toLocaleString()
+                ) : (
+                  <Spinner />
+                )}
               </BigText>
             </CardBody>
           </Card>
@@ -82,9 +87,11 @@ export default function Home() {
             />
             <CardBody>
               <BigText>
-                {layoutDownloads !== null
-                  ? layoutDownloads.toLocaleString()
-                  : "Loading..."}
+                {layoutDownloads !== null ? (
+                  layoutDownloads.toLocaleString()
+                ) : (
+                  <Spinner />
+                )}
               </BigText>
             </CardBody>
           </Card>
@@ -95,9 +102,11 @@ export default function Home() {
             <CardHeader heading="Öppna issues på Github" />
             <CardBody>
               <BigText>
-                {openIssues !== null
-                  ? openIssues.toLocaleString()
-                  : "Loading..."}
+                {openIssues !== null ? (
+                  openIssues.toLocaleString()
+                ) : (
+                  <Spinner />
+                )}
               </BigText>
             </CardBody>
             <CardActions>
@@ -115,9 +124,11 @@ export default function Home() {
             <CardHeader heading="Öppna pull requests på Github" />
             <CardBody>
               <BigText>
-                {openPullRequests !== null
-                  ? openPullRequests.toLocaleString()
-                  : "Loading..."}
+                {openPullRequests !== null ? (
+                  openPullRequests.toLocaleString()
+                ) : (
+                  <Spinner />
+                )}
               </BigText>
             </CardBody>
             <CardActions>
