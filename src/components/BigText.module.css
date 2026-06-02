@@ -1,0 +1,4 @@
+.text {
+  font-size: var(--midas-typography-font-size-90);
+  font-weight: var(--midas-typography-font-weight-bold);
+}

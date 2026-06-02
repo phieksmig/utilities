@@ -9,7 +9,7 @@ import {
   Navigation,
   NavigationItem,
 } from "@midas-ds/layout";
-import { ArrowLeftRight, Search, Home } from "lucide-react";
+import { ArrowLeftRight, Search, LayoutDashboard } from "lucide-react";
 import { NavLink } from "./components/NavLink";
 import { LogoComponent } from "./components/Logo";
 import { GlobalToastRegion } from "@midas-ds/components";
@@ -25,8 +25,8 @@ function App() {
         <Sidebar title="Navigation">
           <Navigation>
             <NavigationItem>
-              <NavLink path="/" icon={<Home />}>
-                Hem
+              <NavLink path="/" icon={<LayoutDashboard />}>
+                Översikt
               </NavLink>
             </NavigationItem>
             <NavigationItem>
