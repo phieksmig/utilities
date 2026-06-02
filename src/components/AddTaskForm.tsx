@@ -1,14 +1,13 @@
 import { Button, ButtonGroup, TextField } from "@midas-ds/components";
 import { useState } from "react";
 import type { Priority } from "../types/types";
+import styles from "./AddTaskForm.module.css";
 
 type AddTaskFormProps = {
   addTodo: (title: string, description: string, priority: Priority) => void;
 };
 
 export const AddTaskForm = ({ addTodo }: AddTaskFormProps) => {
-  // Hooks
-
   //States
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
@@ -27,8 +26,8 @@ export const AddTaskForm = ({ addTodo }: AddTaskFormProps) => {
   };
 
   return (
-    <>
-      <form onSubmit={handleSubmit}>
+    <form onSubmit={handleSubmit}>
+      <div className={styles.form}>
         <TextField
           label="Lägg till uppgift"
           value={title}
@@ -40,7 +39,7 @@ export const AddTaskForm = ({ addTodo }: AddTaskFormProps) => {
             Lägg till
           </Button>
         </ButtonGroup>
-      </form>
-    </>
+      </div>
+    </form>
   );
 };
