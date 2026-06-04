@@ -1,0 +1,9 @@
+.listTag {
+  display: flex;
+  padding: var(--midas-space-xsmall) var(--midas-space-medium);
+  justify-content: center;
+  align-items: center;
+  background-color: var(--midas-button-background-primary-base);
+  border-radius: 1rem;
+  color: var(--midas-text-on-color);
+}
