@@ -50,23 +50,16 @@ export function useTodos() {
    * Edits an existing todo by its id
    * Updates title, description, and priority while keeping other properties intact
    */
-  const editTodo = (
-    id: string,
-    title: string,
-    description: string,
-    priority: Priority,
-  ) => {
+
+  const editTitle = (id: string, title: string) => {
     setTodos((prev) =>
-      prev.map((todo) =>
-        todo.id === id
-          ? {
-              ...todo,
-              title,
-              description: description || undefined,
-              priority,
-            }
-          : todo,
-      ),
+      prev.map((todo) => (todo.id === id ? { ...todo, title } : todo)),
+    );
+  };
+
+  const editDescription = (id: string, description: string) => {
+    setTodos((prev) =>
+      prev.map((todo) => (todo.id === id ? { ...todo, description } : todo)),
     );
   };
 
@@ -88,5 +81,5 @@ export function useTodos() {
     setTodos((prev) => prev.filter((todo) => todo.id !== id));
   };
 
-  return { todos, addTodo, editTodo, toggleTodo, deleteTodo };
+  return { todos, addTodo, editTitle, editDescription, toggleTodo, deleteTodo };
 }
