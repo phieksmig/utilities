@@ -18,3 +18,9 @@
   padding: 0 1rem;
   border-bottom: 1px solid var(--midas-border-color-subtle);
 }
+
+.emptyState {
+  display: flex;
+  justify-content: center;
+  padding: 2rem;
+}
