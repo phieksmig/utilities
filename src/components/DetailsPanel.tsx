@@ -16,7 +16,7 @@ export const DetailsPanel = ({ isOpen, onOpenChange }: DetailsPanelProps) => {
       onOpenChange={onOpenChange}
     >
       <div className={styles.panelContainer}>
-        <Text>En cool text yo!</Text>
+        <Text>Här kommer man kunna uppdatera uppgiften!</Text>
       </div>
     </Panel>
   );
