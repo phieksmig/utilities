@@ -1,14 +1,9 @@
 import styles from "./Todo.module.css";
 import { AddTaskForm } from "../components/AddTaskForm";
-import { Trash2 } from "lucide-react";
+
 import { useTodos } from "../hooks/useTodos";
-import {
-  Accordion,
-  AccordionItem,
-  Button,
-  Checkbox,
-  Heading,
-} from "@midas-ds/components";
+import { Accordion, AccordionItem, Heading } from "@midas-ds/components";
+import { TaskListItem } from "../components/TaskListItem";
 
 export default function Todo() {
   const { todos, addTodo, toggleTodo, deleteTodo } = useTodos();
@@ -26,21 +21,13 @@ export default function Todo() {
         <p>Inga uppgifter kvar, bra jobbat!</p>
       ) : (
         activeTodos.map((todo) => (
-          <div key={todo.id} className={styles.todoList}>
-            <Checkbox
-              isSelected={todo.isCompleted}
-              onChange={() => toggleTodo(todo.id)}
-            >
-              {todo.title}
-            </Checkbox>
-            <p>{todo.description}</p>
-
-            <Button
-              variant="icon"
-              icon={Trash2}
-              onClick={() => deleteTodo(todo.id)}
-            ></Button>
-          </div>
+          <TaskListItem
+            key={todo.id}
+            title={todo.title}
+            isCompleted={todo.isCompleted}
+            onToggle={() => toggleTodo(todo.id)}
+            onDelete={() => deleteTodo(todo.id)}
+          />
         ))
       )}
     </div>
