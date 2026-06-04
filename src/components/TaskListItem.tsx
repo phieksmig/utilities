@@ -1,5 +1,7 @@
 import { Button, Checkbox } from "@midas-ds/components";
+import { usePanels } from "@midas-ds/layout";
 import { Trash2 } from "lucide-react";
+import { EditTaskForm } from "./EditTaskForm";
 import styles from "./TaskListItem.module.css";
 
 type TaskListItemProps = {
@@ -8,7 +10,6 @@ type TaskListItemProps = {
   isCompleted: boolean;
   onToggle: () => void;
   onDelete: () => void;
-  onOpenDetails?: (todoId: string) => void;
 };
 
 export const TaskListItem = ({
@@ -17,13 +18,22 @@ export const TaskListItem = ({
   isCompleted,
   onToggle,
   onDelete,
-  onOpenDetails,
 }: TaskListItemProps) => {
+  const { addPanel } = usePanels();
+
+  const handleOpenDetails = () => {
+    addPanel({
+      id: "todo-details",
+      title,
+      children: <EditTaskForm todoId={id} />,
+    });
+  };
+
   return (
     <div
       className={styles.taskListItem}
       role="button"
-      onClick={() => onOpenDetails?.(id)}
+      onClick={handleOpenDetails}
     >
       <span onClick={(e) => e.stopPropagation()}>
         <Checkbox isSelected={isCompleted} onChange={onToggle}>
