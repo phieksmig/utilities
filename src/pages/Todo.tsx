@@ -1,14 +1,9 @@
 import styles from "./Todo.module.css";
 import { AddTaskForm } from "../components/AddTaskForm";
 import { useTodos } from "../hooks/useTodos";
-import {
-  Accordion,
-  AccordionItem,
-  Heading,
-  Badge,
-  Text,
-} from "@midas-ds/components";
+import { Accordion, AccordionItem, Text } from "@midas-ds/components";
 import { TaskListItem } from "../components/TaskListItem";
+import { TaskListHeader } from "../components/TaskListHeader";
 
 export default function Todo() {
   const { todos, addTodo, toggleTodo, deleteTodo } = useTodos();
@@ -22,10 +17,7 @@ export default function Todo() {
         </AccordionItem>
       </Accordion>
       <div className={styles.todoList}>
-        <div className={styles.todoListHeader}>
-          <Heading level={3}>Dina uppgifter</Heading>
-          <Badge>{activeTodos.length}</Badge>
-        </div>
+        <TaskListHeader count={activeTodos.length} />
         {activeTodos.length === 0 ? (
           <div className={styles.emptyState}>
             <Text>Inga uppgifter kvar, bra jobbat!</Text>
