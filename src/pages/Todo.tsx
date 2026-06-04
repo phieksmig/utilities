@@ -1,7 +1,7 @@
 import styles from "./Todo.module.css";
 import { AddTaskForm } from "../components/AddTaskForm";
 import { useTodos } from "../hooks/useTodos";
-import { Accordion, AccordionItem, Heading } from "@midas-ds/components";
+import { Accordion, AccordionItem, Heading, Badge } from "@midas-ds/components";
 import { TaskListItem } from "../components/TaskListItem";
 
 export default function Todo() {
@@ -18,6 +18,7 @@ export default function Todo() {
       <div className={styles.todoList}>
         <div className={styles.todoListHeader}>
           <Heading level={3}>Dina uppgifter</Heading>
+          <Badge>{activeTodos.length}</Badge>
         </div>
         {activeTodos.length === 0 ? (
           <p>Inga uppgifter kvar, bra jobbat!</p>

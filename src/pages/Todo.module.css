@@ -14,6 +14,7 @@
   min-height: 3rem;
   display: flex;
   align-items: center;
-  padding-left: 1rem;
+  justify-content: space-between;
+  padding: 0 1rem;
   border-bottom: 1px solid var(--midas-border-color-subtle);
 }
