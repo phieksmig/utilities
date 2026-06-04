@@ -60,7 +60,7 @@ function App() {
 
         <Main>
           <GlobalToastRegion />
-          <Outlet context={{ openDetails }} />;
+          <Outlet context={{ openDetails }} />
         </Main>
         <DetailsPanel isOpen={isDetailsOpen} onOpenChange={setIsDetailsOpen} />
       </LayoutContent>
