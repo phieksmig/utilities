@@ -18,8 +18,14 @@ import {
 import { NavLink } from "./components/NavLink";
 import { LogoComponent } from "./components/Logo";
 import { GlobalToastRegion } from "@midas-ds/components";
+import { DetailsPanel } from "./components/DetailsPanel";
+import { useState } from "react";
 
 function App() {
+  const [isDetailsOpen, setIsDetailsOpen] = useState(false);
+
+  const openDetails = () => setIsDetailsOpen(true);
+
   return (
     <Layout>
       <Header>
@@ -54,8 +60,9 @@ function App() {
 
         <Main>
           <GlobalToastRegion />
-          <Outlet />
+          <Outlet context={{ openDetails }} />;
         </Main>
+        <DetailsPanel isOpen={isDetailsOpen} onOpenChange={setIsDetailsOpen} />
       </LayoutContent>
     </Layout>
   );

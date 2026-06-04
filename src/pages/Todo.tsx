@@ -4,10 +4,16 @@ import { useTodos } from "../hooks/useTodos";
 import { Accordion, AccordionItem, Text } from "@midas-ds/components";
 import { TaskListItem } from "../components/TaskListItem";
 import { TaskListHeader } from "../components/TaskListHeader";
+import { useOutletContext } from "react-router";
+
+type OutletContext = {
+  openDetails: () => void;
+};
 
 export default function Todo() {
   const { todos, addTodo, toggleTodo, deleteTodo } = useTodos();
   const activeTodos = todos.filter((todo) => !todo.isCompleted);
+  const { openDetails } = useOutletContext<OutletContext>();
 
   return (
     <div className={styles.mainContainer}>
@@ -30,6 +36,7 @@ export default function Todo() {
               isCompleted={todo.isCompleted}
               onToggle={() => toggleTodo(todo.id)}
               onDelete={() => deleteTodo(todo.id)}
+              onOpenDetails={openDetails}
             />
           ))
         )}
