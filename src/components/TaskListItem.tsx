@@ -7,6 +7,7 @@ type TaskListItemProps = {
   isCompleted: boolean;
   onToggle: () => void;
   onDelete: () => void;
+  onOpenDetails?: () => void;
 };
 
 export const TaskListItem = ({
@@ -14,9 +15,10 @@ export const TaskListItem = ({
   isCompleted,
   onToggle,
   onDelete,
+  onOpenDetails,
 }: TaskListItemProps) => {
   return (
-    <div className={styles.taskListItem}>
+    <div className={styles.taskListItem} role="button" onClick={onOpenDetails}>
       <Checkbox isSelected={isCompleted} onChange={onToggle}>
         {title}
       </Checkbox>
