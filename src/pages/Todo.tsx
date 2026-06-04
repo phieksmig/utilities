@@ -2,7 +2,13 @@ import styles from "./Todo.module.css";
 import { AddTaskForm } from "../components/AddTaskForm";
 import { Trash2 } from "lucide-react";
 import { useTodos } from "../hooks/useTodos";
-import { Button, Checkbox, Heading } from "@midas-ds/components";
+import {
+  Accordion,
+  AccordionItem,
+  Button,
+  Checkbox,
+  Heading,
+} from "@midas-ds/components";
 
 export default function Todo() {
   const { todos, addTodo, toggleTodo, deleteTodo } = useTodos();
@@ -10,7 +16,11 @@ export default function Todo() {
 
   return (
     <div className={styles.mainContainer}>
-      <AddTaskForm addTodo={addTodo} />
+      <Accordion isContained>
+        <AccordionItem id="add-task" title="Lägg till uppgift">
+          <AddTaskForm addTodo={addTodo} />
+        </AccordionItem>
+      </Accordion>
       <Heading level={3}>Dina uppgifter</Heading>
       {activeTodos.length === 0 ? (
         <p>Inga uppgifter kvar, bra jobbat!</p>
