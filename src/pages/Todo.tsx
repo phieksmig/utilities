@@ -7,7 +7,7 @@ import { TaskListHeader } from "../components/TaskListHeader";
 import { useOutletContext } from "react-router";
 
 type OutletContext = {
-  openDetails: () => void;
+  openDetails: (todoId: string) => void;
 };
 
 export default function Todo() {
@@ -32,6 +32,7 @@ export default function Todo() {
           activeTodos.map((todo) => (
             <TaskListItem
               key={todo.id}
+              id={todo.id}
               title={todo.title}
               isCompleted={todo.isCompleted}
               onToggle={() => toggleTodo(todo.id)}

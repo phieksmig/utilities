@@ -3,14 +3,16 @@ import { Trash2 } from "lucide-react";
 import styles from "./TaskListItem.module.css";
 
 type TaskListItemProps = {
+  id: string;
   title: string;
   isCompleted: boolean;
   onToggle: () => void;
   onDelete: () => void;
-  onOpenDetails?: () => void;
+  onOpenDetails?: (todoId: string) => void;
 };
 
 export const TaskListItem = ({
+  id,
   title,
   isCompleted,
   onToggle,
@@ -18,7 +20,11 @@ export const TaskListItem = ({
   onOpenDetails,
 }: TaskListItemProps) => {
   return (
-    <div className={styles.taskListItem} role="button" onClick={onOpenDetails}>
+    <div
+      className={styles.taskListItem}
+      role="button"
+      onClick={() => onOpenDetails?.(id)}
+    >
       <span onClick={(e) => e.stopPropagation()}>
         <Checkbox isSelected={isCompleted} onChange={onToggle}>
           {title}

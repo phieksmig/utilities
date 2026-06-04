@@ -23,8 +23,12 @@ import { useState } from "react";
 
 function App() {
   const [isDetailsOpen, setIsDetailsOpen] = useState(false);
+  const [selectedTodoId, setSelectedTodoId] = useState<string | null>(null);
 
-  const openDetails = () => setIsDetailsOpen(true);
+  const openDetails = (todoId: string) => {
+    setSelectedTodoId(todoId);
+    setIsDetailsOpen(true);
+  };
 
   return (
     <Layout>
@@ -62,7 +66,12 @@ function App() {
           <GlobalToastRegion />
           <Outlet context={{ openDetails }} />
         </Main>
-        <DetailsPanel isOpen={isDetailsOpen} onOpenChange={setIsDetailsOpen} />
+        <DetailsPanel
+          key={selectedTodoId ?? "details"}
+          isOpen={isDetailsOpen}
+          onOpenChange={setIsDetailsOpen}
+          selectedTodoId={selectedTodoId}
+        />
       </LayoutContent>
     </Layout>
   );
