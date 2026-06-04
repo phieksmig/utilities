@@ -9,7 +9,12 @@ import {
   Navigation,
   NavigationItem,
 } from "@midas-ds/layout";
-import { ArrowLeftRight, Search, LayoutDashboard } from "lucide-react";
+import {
+  ArrowLeftRight,
+  Search,
+  LayoutDashboard,
+  ListTodo,
+} from "lucide-react";
 import { NavLink } from "./components/NavLink";
 import { LogoComponent } from "./components/Logo";
 import { GlobalToastRegion } from "@midas-ds/components";
@@ -27,6 +32,11 @@ function App() {
             <NavigationItem>
               <NavLink path="/" icon={<LayoutDashboard />}>
                 Översikt
+              </NavLink>
+            </NavigationItem>
+            <NavigationItem>
+              <NavLink path="/todo" icon={<ListTodo />}>
+                Att göra
               </NavLink>
             </NavigationItem>
             <NavigationItem>
