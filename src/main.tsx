@@ -16,7 +16,7 @@ createRoot(document.getElementById("root")!).render(
       <Routes>
         <Route element={<App />}>
           <Route path="/" index element={<Dashboard />} />
-          <Route path="/todo" index element={<Todo />} />
+          <Route path="/todo" element={<Todo />} />
           <Route path="/pixeltorem" element={<PixelToRem />} />
           <Route path="/tokenfinder" element={<TokenFinder />} />
         </Route>
