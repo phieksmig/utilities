@@ -19,10 +19,19 @@ export const TaskListItem = ({
 }: TaskListItemProps) => {
   return (
     <div className={styles.taskListItem} role="button" onClick={onOpenDetails}>
-      <Checkbox isSelected={isCompleted} onChange={onToggle}>
-        {title}
-      </Checkbox>
-      <Button variant="icon" icon={Trash2} onClick={onDelete}></Button>
+      <span onClick={(e) => e.stopPropagation()}>
+        <Checkbox isSelected={isCompleted} onChange={onToggle}>
+          {title}
+        </Checkbox>
+      </span>
+      <Button
+        variant="icon"
+        icon={Trash2}
+        onClick={(e) => {
+          e.stopPropagation();
+          onDelete();
+        }}
+      ></Button>
     </div>
   );
 };
