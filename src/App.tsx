@@ -9,12 +9,23 @@ import {
   Navigation,
   NavigationItem,
 } from "@midas-ds/layout";
-import { ArrowLeftRight, Search, LayoutDashboard } from "lucide-react";
+import {
+  ArrowLeftRight,
+  Search,
+  LayoutDashboard,
+  ListTodo,
+} from "lucide-react";
 import { NavLink } from "./components/NavLink";
 import { LogoComponent } from "./components/Logo";
 import { GlobalToastRegion } from "@midas-ds/components";
+import { DetailsPanel } from "./components/DetailsPanel";
+import { useState } from "react";
 
 function App() {
+  const [isDetailsOpen, setIsDetailsOpen] = useState(false);
+
+  const openDetails = () => setIsDetailsOpen(true);
+
   return (
     <Layout>
       <Header>
@@ -27,6 +38,11 @@ function App() {
             <NavigationItem>
               <NavLink path="/" icon={<LayoutDashboard />}>
                 Översikt
+              </NavLink>
+            </NavigationItem>
+            <NavigationItem>
+              <NavLink path="/todo" icon={<ListTodo />}>
+                Att göra
               </NavLink>
             </NavigationItem>
             <NavigationItem>
@@ -44,8 +60,9 @@ function App() {
 
         <Main>
           <GlobalToastRegion />
-          <Outlet />
+          <Outlet context={{ openDetails }} />
         </Main>
+        <DetailsPanel isOpen={isDetailsOpen} onOpenChange={setIsDetailsOpen} />
       </LayoutContent>
     </Layout>
   );

@@ -1,0 +1,16 @@
+.mainContainer {
+  max-width: 600px;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+.todoList {
+  display: flex;
+  flex-direction: column;
+}
+
+.emptyState {
+  display: flex;
+  justify-content: center;
+  padding: 2rem;
+}

@@ -1,0 +1,9 @@
+.taskListHeader {
+  background-color: var(--midas-layer-01-base);
+  min-height: 3rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 1rem;
+  border-bottom: 1px solid var(--midas-border-color-subtle);
+}

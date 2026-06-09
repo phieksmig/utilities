@@ -1,0 +1,13 @@
+.taskListItem {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-left: var(--midas-space-medium);
+  gap: var(--midas-space-medium);
+  border-bottom: 1px solid var(--midas-border-color-subtle);
+  cursor: pointer;
+}
+
+.taskListItem:hover {
+  background-color: var(--midas-layer-01-hover);
+}
