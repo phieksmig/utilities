@@ -68,7 +68,7 @@ export default function Todo() {
         )}
       </div>
       <Modal title="Radera uppgift" isOpen={open} onOpenChange={setOpen}>
-        Är du säker på at du vill radera uppgiften?
+        <Text>Är du säker på att du vill radera uppgiften?</Text>
         <ButtonGroup>
           <Button
             variant="danger"
