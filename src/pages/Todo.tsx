@@ -14,6 +14,7 @@ import { TaskListItem } from "../components/TaskListItem";
 import { TaskListHeader } from "../components/TaskListHeader";
 import { useOutletContext } from "react-router";
 import { useState } from "react";
+import { getRandomSuccessMessage } from "../utils/toastMessages";
 
 type OutletContext = {
   openDetails: () => void;
@@ -30,7 +31,7 @@ export default function Todo() {
   const handleToggle = (id: string) => {
     toggleTodo(id);
     toastQueue.add(
-      { type: "success", message: "Uppgiften slutfördes!" },
+      { type: "success", message: getRandomSuccessMessage() },
       { timeout: 5000 },
     );
   };
