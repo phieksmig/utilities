@@ -8,7 +8,6 @@ export const SUCCESS_MESSAGES = [
   "Katching! 🏆",
   "High five! 🙌",
   "Let's goooooo! 🚀",
-  ""
 ];
 
 export const getRandomSuccessMessage = (): string => {
