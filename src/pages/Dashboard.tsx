@@ -48,7 +48,7 @@ export default function Home() {
         <GridItem size={"auto"}>
           <Card>
             <CardHeader
-              heading="Nedladdningar @midas-ds/layout"
+              heading="Nedladdningar @midas-ds/components"
               subHeading="Totalt antal"
             />
             <CardBody>
