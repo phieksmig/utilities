@@ -6,7 +6,8 @@ import { TaskListItem } from "../components/TaskListItem";
 import { TaskListHeader } from "../components/TaskListHeader";
 
 export default function Todo() {
-  const { todos, addTodo, toggleTodo, deleteTodo } = useTodos();
+  const { todos, addTodo, toggleTodo, deleteTodo, editTitle, editDescription } =
+    useTodos();
   const activeTodos = todos.filter((todo) => !todo.isCompleted);
 
   return (
@@ -31,6 +32,9 @@ export default function Todo() {
               isCompleted={todo.isCompleted}
               onToggle={() => toggleTodo(todo.id)}
               onDelete={() => deleteTodo(todo.id)}
+              todos={todos}
+              editTitle={editTitle}
+              editDescription={editDescription}
             />
           ))
         )}

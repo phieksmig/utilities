@@ -3,6 +3,7 @@ import { usePanels } from "@midas-ds/layout";
 import { Trash2 } from "lucide-react";
 import { EditTaskForm } from "./EditTaskForm";
 import styles from "./TaskListItem.module.css";
+import type { Todo } from "../types/types";
 
 type TaskListItemProps = {
   id: string;
@@ -10,6 +11,9 @@ type TaskListItemProps = {
   isCompleted: boolean;
   onToggle: () => void;
   onDelete: () => void;
+  todos: Todo[];
+  editTitle: (id: string, title: string) => void;
+  editDescription: (id: string, description: string) => void;
 };
 
 export const TaskListItem = ({
@@ -18,14 +22,24 @@ export const TaskListItem = ({
   isCompleted,
   onToggle,
   onDelete,
+  todos,
+  editTitle,
+  editDescription,
 }: TaskListItemProps) => {
   const { addPanel } = usePanels();
 
   const handleOpenDetails = () => {
     addPanel({
       id: "todo-details",
-      title,
-      children: <EditTaskForm todoId={id} />,
+      title: "Detaljer",
+      children: (
+        <EditTaskForm
+          todoId={id}
+          todos={todos}
+          editTitle={editTitle}
+          editDescription={editDescription}
+        />
+      ),
     });
   };
 
