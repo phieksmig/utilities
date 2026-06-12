@@ -2,7 +2,7 @@ import { TextArea, TextField, Button } from "@midas-ds/components";
 import styles from "./EditTaskForm.module.css";
 import type { Todo } from "../types/types";
 import { Pen } from "lucide-react";
-import { useState, useEffect } from "react";
+import { useState } from "react";
 
 interface EditTaskFormProps {
   todoId: string;
