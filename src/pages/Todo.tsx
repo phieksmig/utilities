@@ -1,45 +1,14 @@
 import styles from "./Todo.module.css";
 import { AddTaskForm } from "../components/AddTaskForm";
 import { useTodos } from "../hooks/useTodos";
-import {
-  Accordion,
-  toastQueue,
-  AccordionItem,
-  Text,
-  Modal,
-  Button,
-  ButtonGroup,
-} from "@midas-ds/components";
+import { Accordion, AccordionItem, Text } from "@midas-ds/components";
 import { TaskListItem } from "../components/TaskListItem";
 import { TaskListHeader } from "../components/TaskListHeader";
-import { useOutletContext } from "react-router";
-import { useState } from "react";
-import { getRandomSuccessMessage } from "../utils/toastMessages";
-
-type OutletContext = {
-  openDetails: () => void;
-};
 
 export default function Todo() {
-  const { todos, addTodo, toggleTodo, deleteTodo } = useTodos();
+  const { todos, addTodo, toggleTodo, deleteTodo, editTitle, editDescription } =
+    useTodos();
   const activeTodos = todos.filter((todo) => !todo.isCompleted);
-  const { openDetails } = useOutletContext<OutletContext>();
-
-  const [open, setOpen] = useState(false);
-  const [todoIdToDelete, setTodoIdToDelete] = useState<string | null>(null);
-
-  const handleToggle = (id: string) => {
-    toggleTodo(id);
-    toastQueue.add(
-      { type: "success", message: getRandomSuccessMessage() },
-      { timeout: 5000 },
-    );
-  };
-
-  const handleDelete = (id: string) => {
-    setTodoIdToDelete(id);
-    setOpen(true);
-  };
 
   return (
     <div className={styles.mainContainer}>
@@ -58,34 +27,18 @@ export default function Todo() {
           activeTodos.map((todo) => (
             <TaskListItem
               key={todo.id}
+              id={todo.id}
               title={todo.title}
               isCompleted={todo.isCompleted}
-              onToggle={() => handleToggle(todo.id)}
-              onDelete={() => handleDelete(todo.id)}
-              onOpenDetails={openDetails}
+              onToggle={() => toggleTodo(todo.id)}
+              onDelete={() => deleteTodo(todo.id)}
+              todos={todos}
+              editTitle={editTitle}
+              editDescription={editDescription}
             />
           ))
         )}
       </div>
-      <Modal title="Radera uppgift" isOpen={open} onOpenChange={setOpen}>
-        <Text>Är du säker på att du vill radera uppgiften?</Text>
-        <ButtonGroup>
-          <Button
-            variant="danger"
-            onPress={() => {
-              if (todoIdToDelete) {
-                deleteTodo(todoIdToDelete);
-                setOpen(false);
-              }
-            }}
-          >
-            Radera
-          </Button>
-          <Button variant="secondary" slot={"close"}>
-            Avbryt
-          </Button>
-        </ButtonGroup>
-      </Modal>
     </div>
   );
 }

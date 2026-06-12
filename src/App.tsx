@@ -8,6 +8,8 @@ import {
   Sidebar,
   Navigation,
   NavigationItem,
+  PanelProvider,
+  PanelRegion,
 } from "@midas-ds/layout";
 import {
   ArrowLeftRight,
@@ -18,53 +20,50 @@ import {
 import { NavLink } from "./components/NavLink";
 import { LogoComponent } from "./components/Logo";
 import { GlobalToastRegion } from "@midas-ds/components";
-import { DetailsPanel } from "./components/DetailsPanel";
-import { useState } from "react";
 
 function App() {
-  const [isDetailsOpen, setIsDetailsOpen] = useState(false);
-
-  const openDetails = () => setIsDetailsOpen(true);
-
   return (
-    <Layout>
-      <Header>
-        <LogoComponent />
-      </Header>
+    <PanelProvider panelBehavior="pop-to">
+      {/* This will be replaced with "replace" in the next version of Midas Layout */}
+      <Layout>
+        <Header>
+          <LogoComponent />
+        </Header>
 
-      <LayoutContent>
-        <Sidebar title="Navigation">
-          <Navigation>
-            <NavigationItem>
-              <NavLink path="/" icon={<LayoutDashboard />}>
-                Översikt
-              </NavLink>
-            </NavigationItem>
-            <NavigationItem>
-              <NavLink path="/todo" icon={<ListTodo />}>
-                Att göra
-              </NavLink>
-            </NavigationItem>
-            <NavigationItem>
-              <NavLink path="/pixeltorem" icon={<ArrowLeftRight />}>
-                Pixel to REM
-              </NavLink>
-            </NavigationItem>
-            <NavigationItem>
-              <NavLink path="/tokenfinder" icon={<Search />}>
-                Token Finder
-              </NavLink>
-            </NavigationItem>
-          </Navigation>
-        </Sidebar>
+        <LayoutContent>
+          <Sidebar title="Navigation">
+            <Navigation>
+              <NavigationItem>
+                <NavLink path="/" icon={<LayoutDashboard />}>
+                  Översikt
+                </NavLink>
+              </NavigationItem>
+              <NavigationItem>
+                <NavLink path="/todo" icon={<ListTodo />}>
+                  Att göra
+                </NavLink>
+              </NavigationItem>
+              <NavigationItem>
+                <NavLink path="/pixeltorem" icon={<ArrowLeftRight />}>
+                  Pixel to REM
+                </NavLink>
+              </NavigationItem>
+              <NavigationItem>
+                <NavLink path="/tokenfinder" icon={<Search />}>
+                  Token Finder
+                </NavLink>
+              </NavigationItem>
+            </Navigation>
+          </Sidebar>
 
-        <Main>
-          <GlobalToastRegion />
-          <Outlet context={{ openDetails }} />
-        </Main>
-        <DetailsPanel isOpen={isDetailsOpen} onOpenChange={setIsDetailsOpen} />
-      </LayoutContent>
-    </Layout>
+          <Main>
+            <GlobalToastRegion />
+            <Outlet />
+          </Main>
+          <PanelRegion />
+        </LayoutContent>
+      </Layout>
+    </PanelProvider>
   );
 }
 
