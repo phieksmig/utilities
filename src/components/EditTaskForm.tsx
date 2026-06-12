@@ -1,7 +1,7 @@
-import { TextArea, TextField, Button } from "@midas-ds/components";
+import { TextArea, TextField, Button, ButtonGroup } from "@midas-ds/components";
 import styles from "./EditTaskForm.module.css";
 import type { Todo } from "../types/types";
-import { Pen } from "lucide-react";
+import { Pencil } from "lucide-react";
 import { useState } from "react";
 
 interface EditTaskFormProps {
@@ -64,7 +64,10 @@ export const EditTaskForm = ({
       <TextField isReadOnly label="Titel" value={formTitle} />
 
       <TextArea isReadOnly label="Beskrivning" value={formDescription} />
-      <Button variant="icon" icon={Pen} onPress={handleEdit}></Button>
+
+      <Button variant="tertiary" icon={Pencil} onPress={handleEdit}>
+        Redigera
+      </Button>
     </div>
   );
 };
