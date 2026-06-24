@@ -14,6 +14,7 @@ import {
   Search,
   LayoutDashboard,
   ListTodo,
+  Sparkles,
 } from "lucide-react";
 import { NavLink } from "./components/NavLink";
 import { LogoComponent } from "./components/Logo";
@@ -43,6 +44,11 @@ function App() {
             <NavigationItem>
               <NavLink path="/todo" icon={<ListTodo />}>
                 Att göra
+              </NavLink>
+            </NavigationItem>
+            <NavigationItem>
+              <NavLink path="/employeeofthemonth" icon={<Sparkles />}>
+                Employee of the Month
               </NavLink>
             </NavigationItem>
             <NavigationItem>

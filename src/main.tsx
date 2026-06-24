@@ -9,6 +9,7 @@ import PixelToRem from "./pages/PixelToRem.tsx";
 import TokenFinder from "./pages/TokenFinder.tsx";
 import Dashboard from "./pages/Dashboard.tsx";
 import Todo from "./pages/Todo.tsx";
+import EmployeeOfTheMonth from "./pages/EmployeeOfTheMonth.tsx";
 
 createRoot(document.getElementById("root")!).render(
   <StrictMode>
@@ -17,6 +18,7 @@ createRoot(document.getElementById("root")!).render(
         <Route element={<App />}>
           <Route path="/" index element={<Dashboard />} />
           <Route path="/todo" element={<Todo />} />
+          <Route path="/employeeofthemonth" element={<EmployeeOfTheMonth />} />
           <Route path="/pixeltorem" element={<PixelToRem />} />
           <Route path="/tokenfinder" element={<TokenFinder />} />
         </Route>

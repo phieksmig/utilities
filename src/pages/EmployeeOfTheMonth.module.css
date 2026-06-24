@@ -1,0 +1,109 @@
+.mainContainer {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+  width: 100%;
+}
+
+.heroHeader {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.heroText {
+  margin: 0;
+  color: var(--text-secondary, #525252);
+  font-size: 1rem;
+  line-height: 1.5;
+}
+
+.contentGrid {
+  display: grid;
+  grid-template-columns: minmax(18rem, 26rem) minmax(0, 1fr);
+  gap: 1.5rem;
+  align-items: start;
+}
+
+.profileCard {
+  box-shadow: 0 3px 5px rgba(0, 0, 0, 0.3);
+}
+
+.imageWrap {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 14rem;
+  background: #b5b5b5;
+  overflow: hidden;
+  border-radius: 0.25rem;
+}
+
+.profileImage {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.quote {
+  margin: 0;
+  color: var(--text-primary, #171717);
+  line-height: 1.6;
+}
+
+.statsSection {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.statsGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(12rem, 1fr));
+  gap: 1rem;
+}
+
+.statCard {
+  min-height: 8rem;
+  box-shadow: 0 3px 5px rgba(0, 0, 0, 0.3);
+}
+
+.statText {
+  margin: 0;
+  color: var(--text-secondary, #525252);
+  line-height: 1.4;
+}
+
+.nominationSection {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.nomineeGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(14rem, 1fr));
+  gap: 1rem;
+}
+
+.nomineeCard {
+  box-shadow: 0 3px 5px rgba(0, 0, 0, 0.3);
+}
+
+.nomineeText {
+  margin: 0;
+  color: var(--text-primary, #171717);
+  line-height: 1.5;
+}
+
+.cardActions {
+  display: flex;
+  padding: 0 1rem 1rem;
+}
+
+@media (max-width: 900px) {
+  .contentGrid {
+    grid-template-columns: 1fr;
+  }
+}
