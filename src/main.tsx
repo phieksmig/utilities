@@ -8,6 +8,7 @@ import App from "./App.tsx";
 import PixelToRem from "./pages/PixelToRem.tsx";
 import TokenFinder from "./pages/TokenFinder.tsx";
 import Dashboard from "./pages/Dashboard.tsx";
+import Demo from "./pages/Demo.tsx";
 import Todo from "./pages/Todo.tsx";
 
 createRoot(document.getElementById("root")!).render(
@@ -19,6 +20,7 @@ createRoot(document.getElementById("root")!).render(
           <Route path="/todo" element={<Todo />} />
           <Route path="/pixeltorem" element={<PixelToRem />} />
           <Route path="/tokenfinder" element={<TokenFinder />} />
+          <Route path="/demo" element={<Demo />} />
         </Route>
       </Routes>
     </HashRouter>
