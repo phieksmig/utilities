@@ -66,7 +66,10 @@ export default function Demo() {
       >
         {(item) => (
           <ListBoxItem textValue={`${item.name} ${item.code}`}>
-            {item.name}
+            <span className={styles.productOption}>
+              <span>{item.name}</span>
+              <span className={styles.productCode}>{item.code}</span>
+            </span>
           </ListBoxItem>
         )}
       </ComboBox>

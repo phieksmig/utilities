@@ -17,7 +17,7 @@ import {
   FlaskConical,
 } from "lucide-react";
 import { NavLink } from "./components/NavLink";
-import { LogoComponent } from "./components/Logo";
+import { HeaderLogo } from "./components/HeaderLogo";
 import { GlobalToastRegion } from "@midas-ds/components";
 import { DetailsPanel } from "./components/DetailsPanel";
 import { useState } from "react";
@@ -30,7 +30,7 @@ function App() {
   return (
     <Layout>
       <Header>
-        <LogoComponent />
+        <HeaderLogo />
       </Header>
 
       <LayoutContent>
