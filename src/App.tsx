@@ -8,7 +8,7 @@ import {
   Sidebar,
   Navigation,
   NavigationItem,
-  MobileMenu,
+  Navbar,
 } from "@midas-ds/layout";
 import {
   ArrowLeftRight,
@@ -31,35 +31,6 @@ function App() {
   return (
     <Layout>
       <Header>
-        <MobileMenu>
-          <Navigation>
-            <NavigationItem>
-              <NavLink path="/" icon={<LayoutDashboard />}>
-                Översikt
-              </NavLink>
-            </NavigationItem>
-            <NavigationItem>
-              <NavLink path="/todo" icon={<ListTodo />}>
-                Att göra
-              </NavLink>
-            </NavigationItem>
-            <NavigationItem>
-              <NavLink path="/pixeltorem" icon={<ArrowLeftRight />}>
-                Pixel to REM
-              </NavLink>
-            </NavigationItem>
-            <NavigationItem>
-              <NavLink path="/tokenfinder" icon={<Search />}>
-                Token Finder
-              </NavLink>
-            </NavigationItem>
-            <NavigationItem>
-              <NavLink path="/demo" icon={<FlaskConical />}>
-                Demosida
-              </NavLink>
-            </NavigationItem>
-          </Navigation>
-        </MobileMenu>
         <HeaderLogo />
       </Header>
 
@@ -100,6 +71,35 @@ function App() {
         </Main>
         <DetailsPanel isOpen={isDetailsOpen} onOpenChange={setIsDetailsOpen} />
       </LayoutContent>
+      <Navbar>
+        <Navigation>
+          <NavigationItem>
+            <NavLink path="/" icon={<LayoutDashboard />}>
+              Översikt
+            </NavLink>
+          </NavigationItem>
+          <NavigationItem>
+            <NavLink path="/todo" icon={<ListTodo />}>
+              Att göra
+            </NavLink>
+          </NavigationItem>
+          <NavigationItem>
+            <NavLink path="/pixeltorem" icon={<ArrowLeftRight />}>
+              Pixel to REM
+            </NavLink>
+          </NavigationItem>
+          <NavigationItem>
+            <NavLink path="/tokenfinder" icon={<Search />}>
+              Token Finder
+            </NavLink>
+          </NavigationItem>
+          <NavigationItem>
+            <NavLink path="/demo" icon={<FlaskConical />}>
+              Demosida
+            </NavLink>
+          </NavigationItem>
+        </Navigation>
+      </Navbar>
     </Layout>
   );
 }
