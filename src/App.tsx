@@ -9,6 +9,9 @@ import {
   Navigation,
   NavigationItem,
   Navbar,
+  HeaderTitle,
+  HeaderActions,
+  HeaderAction,
 } from "@midas-ds/layout";
 import {
   ArrowLeftRight,
@@ -16,6 +19,9 @@ import {
   LayoutDashboard,
   ListTodo,
   FlaskConical,
+  Bell,
+  Languages,
+  User,
 } from "lucide-react";
 import { NavLink } from "./components/NavLink";
 import { HeaderLogo } from "./components/HeaderLogo";
@@ -32,6 +38,12 @@ function App() {
     <Layout>
       <Header>
         <HeaderLogo />
+        <HeaderTitle>Min specialsida</HeaderTitle>
+        <HeaderActions>
+          <HeaderAction icon={<Bell size={20} />}>Aviseringar</HeaderAction>
+          <HeaderAction icon={<Languages size={20} />}>English</HeaderAction>
+          <HeaderAction icon={<User size={20} />}>Logga ut</HeaderAction>
+        </HeaderActions>
       </Header>
 
       <LayoutContent>
