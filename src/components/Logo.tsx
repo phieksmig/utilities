@@ -14,9 +14,7 @@ export const LogoComponent = ({
   const logo = size === "small" ? logoSmall : logoLarge;
 
   return (
-    <div
-      className={[styles.logoContainer, className].filter(Boolean).join(" ")}
-    >
+    <div className={[className].filter(Boolean).join(" ")}>
       <img src={logo} alt="Midas Design System Logo" className={styles.logo} />
     </div>
   );
