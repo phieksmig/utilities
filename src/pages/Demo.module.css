@@ -1,0 +1,16 @@
+.mainContainer {
+  max-width: 600px;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.productOption {
+  display: flex;
+  width: 100%;
+}
+
+.productCode {
+  color: var(--midas-text-secondary);
+  margin-left: auto;
+}

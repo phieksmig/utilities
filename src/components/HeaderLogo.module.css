@@ -1,0 +1,29 @@
+.mobile {
+  flex-shrink: 0;
+  height: 2.25rem;
+  aspect-ratio: 100 / 92;
+
+  @media (width > 375px) {
+    display: none;
+  }
+}
+
+.largeMobile {
+  flex-shrink: 0;
+  height: 2.25rem;
+  aspect-ratio: 100 / 92;
+
+  @media (width <= 375px), (width >= 480px) {
+    display: none;
+  }
+}
+
+.desktop {
+  flex-shrink: 0;
+  height: 2.5rem;
+  aspect-ratio: 112 / 40;
+
+  @media (width < 480px) {
+    display: none;
+  }
+}
