@@ -5,7 +5,8 @@ import styles from "./HeaderLogo.module.css";
 
 export const HeaderLogo = () => (
   <>
-    <LogoComponent size="small" className={styles.mobile} />
-    <LogoComponent size="large" className={styles.desktop} />
+    <LogoComponent variant="small" className={styles.mobile} />
+    <LogoComponent variant="large" className={styles.desktop} />
+    <LogoComponent variant="stacked" className={styles.largeMobile} />
   </>
 );

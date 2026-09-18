@@ -1,17 +1,23 @@
 import logoLarge from "../assets/logo_large.svg";
 import logoSmall from "../assets/logo_small.svg";
+import logoStacked from "../assets/logo_stacked.svg";
 import styles from "./Logo.module.css";
 
 type LogoComponentProps = {
-  size?: "small" | "large";
+  variant?: "small" | "large" | "stacked";
   className?: string;
 };
 
 export const LogoComponent = ({
-  size = "large",
+  variant = "large",
   className,
 }: LogoComponentProps) => {
-  const logo = size === "small" ? logoSmall : logoLarge;
+  const logo =
+    variant === "small"
+      ? logoSmall
+      : variant === "stacked"
+        ? logoStacked
+        : logoLarge;
 
   return (
     <div className={[className].filter(Boolean).join(" ")}>
