@@ -9,7 +9,6 @@ import {
   Navigation,
   NavigationItem,
   MobileMenu,
-  HeaderTitle,
   HeaderAction,
 } from "@midas-ds/layout";
 import {
