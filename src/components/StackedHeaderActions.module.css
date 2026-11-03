@@ -1,0 +1,20 @@
+.stacked.stacked {
+  flex-direction: row;
+  align-items: center;
+}
+
+.stacked.stacked > button {
+  flex-direction: column;
+  gap: var(--midas-space-50);
+}
+
+.stacked.stacked > button > [class*="label_"] {
+  clip-path: none;
+  white-space: nowrap;
+  width: auto;
+  height: auto;
+  margin: 0;
+  padding: 0;
+  position: static;
+  overflow: visible;
+}

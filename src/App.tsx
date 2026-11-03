@@ -8,15 +8,22 @@ import {
   Sidebar,
   Navigation,
   NavigationItem,
+  MobileMenu,
+  HeaderAction,
 } from "@midas-ds/layout";
 import {
   ArrowLeftRight,
   Search,
   LayoutDashboard,
   ListTodo,
+  FlaskConical,
+  Bell,
+  Languages,
+  User,
 } from "lucide-react";
 import { NavLink } from "./components/NavLink";
-import { LogoComponent } from "./components/Logo";
+import { HeaderLogo } from "./components/HeaderLogo";
+import { StackedHeaderActions } from "./components/StackedHeaderActions";
 import { GlobalToastRegion } from "@midas-ds/components";
 import { DetailsPanel } from "./components/DetailsPanel";
 import { useState } from "react";
@@ -29,7 +36,41 @@ function App() {
   return (
     <Layout>
       <Header>
-        <LogoComponent />
+        <HeaderLogo />
+        <StackedHeaderActions>
+          <HeaderAction icon={<Bell size={20} />}>Aviseringar</HeaderAction>
+          <HeaderAction icon={<Languages size={20} />}>English</HeaderAction>
+          <HeaderAction icon={<User size={20} />}>Min profil</HeaderAction>
+        </StackedHeaderActions>
+        <MobileMenu title="Mitt system" className="mobile-menu-right">
+          <Navigation>
+            <NavigationItem>
+              <NavLink path="/" icon={<LayoutDashboard />}>
+                Översikt
+              </NavLink>
+            </NavigationItem>
+            <NavigationItem>
+              <NavLink path="/todo" icon={<ListTodo />}>
+                Att göra
+              </NavLink>
+            </NavigationItem>
+            <NavigationItem>
+              <NavLink path="/pixeltorem" icon={<ArrowLeftRight />}>
+                Pixel to REM
+              </NavLink>
+            </NavigationItem>
+            <NavigationItem>
+              <NavLink path="/tokenfinder" icon={<Search />}>
+                Token Finder
+              </NavLink>
+            </NavigationItem>
+            <NavigationItem>
+              <NavLink path="/demo" icon={<FlaskConical />}>
+                Demosida
+              </NavLink>
+            </NavigationItem>
+          </Navigation>
+        </MobileMenu>
       </Header>
 
       <LayoutContent>
@@ -53,6 +94,11 @@ function App() {
             <NavigationItem>
               <NavLink path="/tokenfinder" icon={<Search />}>
                 Token Finder
+              </NavLink>
+            </NavigationItem>
+            <NavigationItem>
+              <NavLink path="/demo" icon={<FlaskConical />}>
+                Demosida
               </NavLink>
             </NavigationItem>
           </Navigation>
