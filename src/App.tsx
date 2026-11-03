@@ -10,7 +10,6 @@ import {
   NavigationItem,
   MobileMenu,
   HeaderTitle,
-  HeaderActions,
   HeaderAction,
 } from "@midas-ds/layout";
 import {
@@ -25,6 +24,7 @@ import {
 } from "lucide-react";
 import { NavLink } from "./components/NavLink";
 import { HeaderLogo } from "./components/HeaderLogo";
+import { StackedHeaderActions } from "./components/StackedHeaderActions";
 import { GlobalToastRegion } from "@midas-ds/components";
 import { DetailsPanel } from "./components/DetailsPanel";
 import { useState } from "react";
@@ -39,11 +39,11 @@ function App() {
       <Header>
         <HeaderLogo />
         <HeaderTitle>Min specialsida</HeaderTitle>
-        <HeaderActions>
+        <StackedHeaderActions>
           <HeaderAction icon={<Bell size={20} />}>Aviseringar</HeaderAction>
           <HeaderAction icon={<Languages size={20} />}>English</HeaderAction>
           <HeaderAction icon={<User size={20} />}>Logga ut</HeaderAction>
-        </HeaderActions>
+        </StackedHeaderActions>
         <MobileMenu title="Mitt system" className="mobile-menu-right">
           <Navigation>
             <NavigationItem>
