@@ -37,7 +37,14 @@ function App() {
   return (
     <Layout>
       <Header>
-        <MobileMenu title="Mitt system">
+        <HeaderLogo />
+        <HeaderTitle>Min specialsida</HeaderTitle>
+        <HeaderActions>
+          <HeaderAction icon={<Bell size={20} />}>Aviseringar</HeaderAction>
+          <HeaderAction icon={<Languages size={20} />}>English</HeaderAction>
+          <HeaderAction icon={<User size={20} />}>Logga ut</HeaderAction>
+        </HeaderActions>
+        <MobileMenu title="Mitt system" className="mobile-menu-right">
           <Navigation>
             <NavigationItem>
               <NavLink path="/" icon={<LayoutDashboard />}>
@@ -66,13 +73,6 @@ function App() {
             </NavigationItem>
           </Navigation>
         </MobileMenu>
-        <HeaderLogo />
-        <HeaderTitle>Min specialsida</HeaderTitle>
-        <HeaderActions>
-          <HeaderAction icon={<Bell size={20} />}>Aviseringar</HeaderAction>
-          <HeaderAction icon={<Languages size={20} />}>English</HeaderAction>
-          <HeaderAction icon={<User size={20} />}>Logga ut</HeaderAction>
-        </HeaderActions>
       </Header>
 
       <LayoutContent>
