@@ -40,7 +40,7 @@ function App() {
         <StackedHeaderActions>
           <HeaderAction icon={<Bell size={20} />}>Aviseringar</HeaderAction>
           <HeaderAction icon={<Languages size={20} />}>English</HeaderAction>
-          <HeaderAction icon={<User size={20} />}>Logga ut</HeaderAction>
+          <HeaderAction icon={<User size={20} />}>Min profil</HeaderAction>
         </StackedHeaderActions>
         <MobileMenu title="Mitt system" className="mobile-menu-right">
           <Navigation>
