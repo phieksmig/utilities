@@ -8,7 +8,7 @@ import {
   Sidebar,
   Navigation,
   NavigationItem,
-  Navbar,
+  MobileMenu,
   HeaderTitle,
   HeaderActions,
   HeaderAction,
@@ -37,6 +37,35 @@ function App() {
   return (
     <Layout>
       <Header>
+        <MobileMenu title="Mitt system">
+          <Navigation>
+            <NavigationItem>
+              <NavLink path="/" icon={<LayoutDashboard />}>
+                Översikt
+              </NavLink>
+            </NavigationItem>
+            <NavigationItem>
+              <NavLink path="/todo" icon={<ListTodo />}>
+                Att göra
+              </NavLink>
+            </NavigationItem>
+            <NavigationItem>
+              <NavLink path="/pixeltorem" icon={<ArrowLeftRight />}>
+                Pixel to REM
+              </NavLink>
+            </NavigationItem>
+            <NavigationItem>
+              <NavLink path="/tokenfinder" icon={<Search />}>
+                Token Finder
+              </NavLink>
+            </NavigationItem>
+            <NavigationItem>
+              <NavLink path="/demo" icon={<FlaskConical />}>
+                Demosida
+              </NavLink>
+            </NavigationItem>
+          </Navigation>
+        </MobileMenu>
         <HeaderLogo />
         <HeaderTitle>Min specialsida</HeaderTitle>
         <HeaderActions>
@@ -83,35 +112,6 @@ function App() {
         </Main>
         <DetailsPanel isOpen={isDetailsOpen} onOpenChange={setIsDetailsOpen} />
       </LayoutContent>
-      <Navbar>
-        <Navigation>
-          <NavigationItem>
-            <NavLink path="/" icon={<LayoutDashboard />}>
-              Översikt
-            </NavLink>
-          </NavigationItem>
-          <NavigationItem>
-            <NavLink path="/todo" icon={<ListTodo />}>
-              Att göra
-            </NavLink>
-          </NavigationItem>
-          <NavigationItem>
-            <NavLink path="/pixeltorem" icon={<ArrowLeftRight />}>
-              Pixel to REM
-            </NavLink>
-          </NavigationItem>
-          <NavigationItem>
-            <NavLink path="/tokenfinder" icon={<Search />}>
-              Token Finder
-            </NavLink>
-          </NavigationItem>
-          <NavigationItem>
-            <NavLink path="/demo" icon={<FlaskConical />}>
-              Demosida
-            </NavLink>
-          </NavigationItem>
-        </Navigation>
-      </Navbar>
     </Layout>
   );
 }
