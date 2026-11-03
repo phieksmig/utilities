@@ -38,7 +38,6 @@ function App() {
     <Layout>
       <Header>
         <HeaderLogo />
-        <HeaderTitle>Min specialsida</HeaderTitle>
         <StackedHeaderActions>
           <HeaderAction icon={<Bell size={20} />}>Aviseringar</HeaderAction>
           <HeaderAction icon={<Languages size={20} />}>English</HeaderAction>
