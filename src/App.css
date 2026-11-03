@@ -33,3 +33,13 @@
     animation: none;
   }
 }
+
+header [class*="triggerButton_"] {
+  flex-direction: column;
+  gap: var(--midas-space-50);
+  margin-inline-start: 8px;
+}
+
+header [class*="triggerButton_"]::after {
+  content: "Meny";
+}
