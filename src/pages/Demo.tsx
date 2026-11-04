@@ -32,12 +32,13 @@ export default function Demo() {
   ];
 
   const fruitQuery = fruitInputValue.trim();
+  const normalizedFruitQuery = fruitQuery.toLocaleLowerCase();
   const matchingFruitExists =
     fruitQuery.length > 0 &&
     fruitOptions.some(
       (fruit) =>
         fruit.kind === "fruit" &&
-        fruit.name.toLowerCase().includes(fruitQuery.toLowerCase()),
+        fruit.name.toLocaleLowerCase().includes(normalizedFruitQuery),
     );
   const creatableFruitOptions: FruitOption[] = [
     ...fruitOptions,
@@ -45,7 +46,7 @@ export default function Demo() {
       ? []
       : [
           {
-            id: `create:${fruitQuery.toLowerCase()}`,
+            id: "create-option",
             name: fruitQuery,
             kind: "create" as const,
           },
@@ -53,7 +54,8 @@ export default function Demo() {
   ];
 
   const customFilter = (textValue: string, filterText: string) => {
-    return textValue.toLowerCase().includes(filterText.toLowerCase());
+    const normalizedFilter = filterText.trim().toLocaleLowerCase();
+    return textValue.toLocaleLowerCase().includes(normalizedFilter);
   };
 
   const handleInputChange = (value: string) => {
