@@ -14,6 +14,7 @@ import {
   Search,
   LayoutDashboard,
   ListTodo,
+  Toolbox,
 } from "lucide-react";
 import { NavLink } from "./components/NavLink";
 import { LogoComponent } from "./components/Logo";
@@ -53,6 +54,11 @@ function App() {
             <NavigationItem>
               <NavLink path="/tokenfinder" icon={<Search />}>
                 Token Finder
+              </NavLink>
+            </NavigationItem>
+            <NavigationItem>
+              <NavLink path="/admintool" icon={<Toolbox />}>
+                Admin tool
               </NavLink>
             </NavigationItem>
           </Navigation>
