@@ -12,6 +12,7 @@ import {
 import {
   ArrowLeftRight,
   Search,
+  FlaskConical,
   LayoutDashboard,
   ListTodo,
 } from "lucide-react";
@@ -53,6 +54,11 @@ function App() {
             <NavigationItem>
               <NavLink path="/tokenfinder" icon={<Search />}>
                 Token Finder
+              </NavLink>
+            </NavigationItem>
+            <NavigationItem>
+              <NavLink path="/tabletest" icon={<FlaskConical />}>
+                Table test
               </NavLink>
             </NavigationItem>
           </Navigation>
