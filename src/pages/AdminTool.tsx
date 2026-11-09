@@ -99,11 +99,12 @@ export default function AdminTool() {
           onPress={openFlowTrackPicker}
         />
         <Modal
-          title="Välj flow och track"
+          title="Pick flow and track"
           isOpen={isPickFlowTrackOpen}
           onOpenChange={setIsPickFlowTrackOpen}
           footer={<Button onPress={handleSaveFlowTrack}>Spara</Button>}
         >
+          This should be two multi combo boxes
           <CheckboxGroup
             label="Välj flow"
             value={flowDraft}
@@ -140,7 +141,10 @@ export default function AdminTool() {
                     {track.name}
                     <ComboBox
                       size="medium"
-                      selectedKey={intervalSelections[flow.id]?.[track.id] ?? null}
+                      placeholder="Välj eller sök intervall"
+                      selectedKey={
+                        intervalSelections[flow.id]?.[track.id] ?? null
+                      }
                       onSelectionChange={(key) => {
                         if (typeof key === "string" || key === null) {
                           setIntervalSelections((currentSelections) => ({
