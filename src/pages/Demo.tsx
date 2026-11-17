@@ -1,7 +1,16 @@
-import { DateField, Text, ComboBox, ListBoxItem } from "@midas-ds/components";
+import {
+  DateField,
+  Text,
+  ComboBox,
+  ListBoxItem,
+  ListBoxHeader,
+  ListBoxSection,
+  Collection,
+} from "@midas-ds/components";
 import { useState } from "react";
 import styles from "./Demo.module.css";
 import { useTwoDigitYear } from "../hooks/useTwoDigitYear";
+import type { Key } from "@midas-ds/components";
 
 interface FruitOption {
   id: string;
@@ -12,6 +21,7 @@ interface FruitOption {
 export default function Demo() {
   const dateProps = useTwoDigitYear(null);
   const [inputValue, setInputValue] = useState("");
+  const [selectedAddress, setSelectedAddress] = useState<Key | null>(null);
   const [selectedKey, setSelectedKey] = useState<string | null>(null);
   const [fruitOptions, setFruitOptions] = useState<FruitOption[]>([
     { id: "fruit-1", name: "Banan", kind: "fruit" },
@@ -29,6 +39,24 @@ export default function Demo() {
   const products: Product[] = [
     { id: "1", name: "Banan", code: "1234" },
     { id: "2", name: "Äpple", code: "5678" },
+  ];
+
+  const addresses = [
+    {
+      name: "Förval",
+      children: [
+        { id: "1", name: "Stockholm Arlanda Flygplats (ARNF)" },
+        { id: "2", name: "Stockholm Hamnar (STOH)" },
+      ],
+    },
+    {
+      name: "Flygplatser",
+      children: [
+        { id: "4", name: "Göteborg Landvetter Flygplats (GOTF)" },
+        { id: "5", name: "Malmö Sturup Flygplats (MMX)" },
+        { id: "6", name: "Stockholm Bromma Flygplats (BMAF)" },
+      ],
+    },
   ];
 
   const fruitQuery = fruitInputValue.trim();
@@ -150,6 +178,24 @@ export default function Demo() {
           <ListBoxItem textValue={fruit.name}>
             {fruit.kind === "create" ? `Create "${fruit.name}"` : fruit.name}
           </ListBoxItem>
+        )}
+      </ComboBox>
+      <ComboBox
+        label="Välj adress"
+        description="Sök eller välj adress"
+        items={addresses}
+        onChange={setSelectedAddress}
+        value={selectedAddress}
+      >
+        {(section) => (
+          <ListBoxSection id={section.name}>
+            <ListBoxHeader>{section.name}</ListBoxHeader>
+            <Collection items={section.children}>
+              {(item) => {
+                return <ListBoxItem id={item.id}>{item.name}</ListBoxItem>;
+              }}
+            </Collection>
+          </ListBoxSection>
         )}
       </ComboBox>
     </div>

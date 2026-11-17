@@ -9,7 +9,6 @@ import {
   Navigation,
   NavigationItem,
   Navbar,
-  HeaderTitle,
   HeaderActions,
   HeaderAction,
 } from "@midas-ds/layout";
@@ -38,7 +37,6 @@ function App() {
     <Layout>
       <Header>
         <HeaderLogo />
-        <HeaderTitle>Min specialsida</HeaderTitle>
         <HeaderActions>
           <HeaderAction icon={<Bell size={20} />}>Aviseringar</HeaderAction>
           <HeaderAction icon={<Languages size={20} />}>English</HeaderAction>
